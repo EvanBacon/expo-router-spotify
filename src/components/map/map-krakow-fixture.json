@@ -1,0 +1,652 @@
+[
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Rynek Główny, 31-422 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0618971, "lng": 19.9367559 },
+        "viewport": {
+          "northeast": { "lat": 50.06304372989272, "lng": 19.94062275 },
+          "southwest": { "lat": 50.06034407010728, "lng": 19.93491695 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+      "icon_background_color": "#7B9EB0",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+      "name": "Rynek Główny",
+      "photos": [
+        {
+          "height": 4642,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/114457828387485715622\">Michał</a>"
+          ],
+          "photo_reference": "AUGGfZnwwpn8TtI5yoU9SDgQq3hQV0oykyHTV_8_E5uC3yMFkqilzNhwUCDf_uKecVLfRmM9SDNa_E7h0QoFwp6tjkJI-qcLRGGGl0QkBE_-Ipb2iafbJrnzVTFoYwwJ_ZRs-DccyP3cWe0CF-H8c5e6bX_sPW_jkBORv6-f7Hgnk_T70N-f",
+          "width": 6959
+        }
+      ],
+      "place_id": "ChIJZ9pVBBJbFkcRMw11Gwf1x8M",
+      "plus_code": { "compound_code": "3W6P+QP Kraków", "global_code": "9F2X3W6P+QP" },
+      "rating": 4.8,
+      "reference": "ChIJZ9pVBBJbFkcRMw11Gwf1x8M",
+      "types": ["tourist_attraction", "point_of_interest", "establishment"],
+      "user_ratings_total": 160813
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Rynek Główny 1/3, 31-042 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0615991, "lng": 19.9373312 },
+        "viewport": {
+          "northeast": { "lat": 50.06355345000001, "lng": 19.93863062989272 },
+          "southwest": { "lat": 50.06048524999999, "lng": 19.93593097010728 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/museum-71.png",
+      "icon_background_color": "#13B5C7",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/museum_pinlet",
+      "name": "Sukiennice",
+      "opening_hours": { "open_now": false },
+      "photos": [
+        {
+          "height": 421,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/106109874655769925293\">wojtek gnela</a>"
+          ],
+          "photo_reference": "AUGGfZk6_Uhe3SXgcNh3rkVqSanPPaQN_Qw9P9kVg8owFEofeQtv2gl5wgoHCEXyc2S9uv3D3XyJb0bNtY2WdfVSqKHI6hJrjMZvE6kzezA_rzIoX1rVX20NGr3MmvA8gToE-I2Po8SE9MrFKeTWZjjdQxwr-T0oqJJAjP4FowRpa0faikJy",
+          "width": 720
+        }
+      ],
+      "place_id": "ChIJ3Q97Bw5bFkcRc3GzJiVsH9A",
+      "plus_code": { "compound_code": "3W6P+JW Kraków", "global_code": "9F2X3W6P+JW" },
+      "rating": 4.7,
+      "reference": "ChIJ3Q97Bw5bFkcRc3GzJiVsH9A",
+      "types": ["museum", "tourist_attraction", "point_of_interest", "establishment"],
+      "user_ratings_total": 12273
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "plac Mariacki 5, 31-042 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0616411, "lng": 19.9393903 },
+        "viewport": {
+          "northeast": { "lat": 50.06301482989272, "lng": 19.94128719999999 },
+          "southwest": { "lat": 50.06031517010728, "lng": 19.9376976 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/worship_general-71.png",
+      "icon_background_color": "#7B9EB0",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/worship_christian_pinlet",
+      "name": "St. Mary's Basilica",
+      "photos": [
+        {
+          "height": 2638,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/102728467682558866813\">Salvador</a>"
+          ],
+          "photo_reference": "AUGGfZkCv5N5MnspafkZWxjsPtDrE9XGudF0j4Axr63iA2fauQp04usIY4jfZOxXaly59zhDHkV5OG_zoqyfGefqQRHw9nMYnfSjCAyER1vBqcoWnSs0ylDPeSAEjlLP6EeTfwBTHvhOyQrwCpLvnFrZ9SQROmN2-0xqy3tczJolAa9M41Ro",
+          "width": 2157
+        }
+      ],
+      "place_id": "ChIJd1A69RFbFkcRMr_ccTAeN90",
+      "plus_code": { "compound_code": "3W6Q+MQ Kraków", "global_code": "9F2X3W6Q+MQ" },
+      "rating": 4.7,
+      "reference": "ChIJd1A69RFbFkcRMr_ccTAeN90",
+      "types": [
+        "tourist_attraction",
+        "church",
+        "place_of_worship",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 15748
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "30-001 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0648602, "lng": 19.9413951 },
+        "viewport": {
+          "northeast": { "lat": 50.06601052989272, "lng": 19.94380989999999 },
+          "southwest": { "lat": 50.06331087010727, "lng": 19.93845230000001 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+      "icon_background_color": "#13B5C7",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+      "name": "St. Florian's Gate",
+      "opening_hours": { "open_now": true },
+      "photos": [
+        {
+          "height": 3672,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/114755886483523736514\">A Google User</a>"
+          ],
+          "photo_reference": "AUGGfZm5WoveK7fhcR6dOTghihS2oo8WaUB-Q4Rnnk7LN_a8TGYp0vKVJvri4H7NnaOm0ehH-axxs2pvPnuu5juostRlJvsOuusUATJ5QarKotpP_9WUz6sa3jM4XcnYM8JMPDdkGqgcMb2mUH5dbeOXfYuphqHZGsDjVuy0_1bED5ZM0HEO",
+          "width": 3057
+        }
+      ],
+      "place_id": "ChIJW_gtOxBbFkcR10uSgmL9xP8",
+      "plus_code": { "compound_code": "3W7R+WH Kraków", "global_code": "9F2X3W7R+WH" },
+      "rating": 4.7,
+      "reference": "ChIJW_gtOxBbFkcR10uSgmL9xP8",
+      "types": ["tourist_attraction", "point_of_interest", "establishment"],
+      "user_ratings_total": 11262
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Rynek Główny 1, 31-042 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.061934, "lng": 19.93777 },
+        "viewport": {
+          "northeast": { "lat": 50.06371002989273, "lng": 19.93864507989272 },
+          "southwest": { "lat": 50.06101037010728, "lng": 19.93594542010728 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/museum-71.png",
+      "icon_background_color": "#13B5C7",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/museum_pinlet",
+      "name": "Rynek Underground Museum",
+      "opening_hours": { "open_now": false },
+      "photos": [
+        {
+          "height": 4032,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/103220967597588215503\">Наталья Циммерман</a>"
+          ],
+          "photo_reference": "AUGGfZlzB9lMc20E5qVGXc-NOBiJ9g-ZiSZ9ZCGrHGqRrYVrpknwXgv7hsoKjN1qbRXtNuHYaDiA1Dzt-eOlW0T_FQ8zDlQ6RANQdLPT4qiPbW4V1_xiz2cN6TSOWpueWs06xQvZxgzRYeiiHVVhNjTCvmfWxy_bNup0kYRgFMTTt1yuFIV8",
+          "width": 3024
+        }
+      ],
+      "place_id": "ChIJERHICBJbFkcRo-dPAVreKqU",
+      "plus_code": { "compound_code": "3W6Q+Q4 Kraków", "global_code": "9F2X3W6Q+Q4" },
+      "rating": 4.5,
+      "reference": "ChIJERHICBJbFkcRo-dPAVreKqU",
+      "types": ["tourist_attraction", "museum", "point_of_interest", "establishment"],
+      "user_ratings_total": 7878
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Wawel 5, 31-001 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0541115, "lng": 19.935423 },
+        "viewport": {
+          "northeast": { "lat": 50.05608382989272, "lng": 19.9396239 },
+          "southwest": { "lat": 50.05338417010728, "lng": 19.9340227 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/museum-71.png",
+      "icon_background_color": "#13B5C7",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/museum_pinlet",
+      "name": "Wawel Royal Castle-State Art Collection",
+      "opening_hours": { "open_now": false },
+      "photos": [
+        {
+          "height": 3120,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/100809838158516817041\">Luigi Altavilla</a>"
+          ],
+          "photo_reference": "AUGGfZnnYrrAh8jwccRyasvAzSDRtsXtunkC5JKbk3s77LILxtnFuoENZPC7avXqAfa3nikCW5XvN0Gn6wZdIoOJqJI9Yk1oMV_zMyJnRL7y_86U_h0i_7yDBKQ9D-DgUJR1QYyTVfQbe-UrDGfBYJBqzKn8gYOgUkamhRB27a_1LuaIysdh",
+          "width": 4160
+        }
+      ],
+      "place_id": "ChIJ9Rk2BW1bFkcRmKV_1sTfuaw",
+      "plus_code": { "compound_code": "3W3P+J5 Kraków", "global_code": "9F2X3W3P+J5" },
+      "rating": 4.7,
+      "reference": "ChIJ9Rk2BW1bFkcRmKV_1sTfuaw",
+      "types": ["museum", "tourist_attraction", "point_of_interest", "establishment"],
+      "user_ratings_total": 146349
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Rynek Główny 35, 31-011 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0626812, "lng": 19.9365176 },
+        "viewport": {
+          "northeast": { "lat": 50.06403212989272, "lng": 19.93804587989272 },
+          "southwest": { "lat": 50.06133247010728, "lng": 19.93534622010728 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/museum-71.png",
+      "icon_background_color": "#13B5C7",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/museum_pinlet",
+      "name": "Historical Museum of the City of Kraków",
+      "opening_hours": { "open_now": false },
+      "photos": [
+        {
+          "height": 3468,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/106418686696146207490\">Dáša Holecová</a>"
+          ],
+          "photo_reference": "AUGGfZk-V1CEzaI-QLEzySmFxBSjhZBxM3RYnEF0LbfFcYJuxAUXGoh3nI_I4wvYpofO5uPh6QxdPpj4bU0DRynSFYThjLVZ6czYvy3ODfNN63a7VRgnPr5KvcMyS980O5JqD5HKwsYsxbqsMmVYMmWoeHEXQSi0iNa4i0F_HRWgWRRTfWjc",
+          "width": 4624
+        }
+      ],
+      "place_id": "ChIJwaiFbA5bFkcR6smpjHvFl6Y",
+      "plus_code": { "compound_code": "3W7P+3J Kraków", "global_code": "9F2X3W7P+3J" },
+      "rating": 4.6,
+      "reference": "ChIJwaiFbA5bFkcR6smpjHvFl6Y",
+      "types": ["tourist_attraction", "museum", "point_of_interest", "establishment"],
+      "user_ratings_total": 4265
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Floriańska 6, 31-021 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0626191, "lng": 19.9395255 },
+        "viewport": {
+          "northeast": { "lat": 50.06406192989272, "lng": 19.94102762989272 },
+          "southwest": { "lat": 50.06136227010727, "lng": 19.93832797010728 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+      "icon_background_color": "#7B9EB0",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+      "name": "Lost Souls Alley",
+      "opening_hours": { "open_now": false },
+      "photos": [
+        {
+          "height": 4032,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/105986578188714263127\">A Google User</a>"
+          ],
+          "photo_reference": "AUGGfZlUba0a771kffLZ9zd0lagAedapEQ7ocXNzYgQ1O5F4khk5lMpOp0bZBoCLbUAibnJv0pyLcKD0-RkcAKcMUpHiCvRXYZ6L5zHPjvdQqIoQ2YZFm3t2EjiyvlVjo1UeKlzqGiOdqBoFysLI0bGtNP0YmodMq7PyFmrk4B1GtOOMtZ8u",
+          "width": 3024
+        }
+      ],
+      "place_id": "ChIJk_TO4BFbFkcR5J-vQiEt3Ew",
+      "plus_code": { "compound_code": "3W7Q+2R Kraków", "global_code": "9F2X3W7Q+2R" },
+      "rating": 4.8,
+      "reference": "ChIJk_TO4BFbFkcR5J-vQiEt3Ew",
+      "types": ["tourist_attraction", "point_of_interest", "establishment"],
+      "user_ratings_total": 3460
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Wawel 3, 31-001 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0546371, "lng": 19.9354684 },
+        "viewport": {
+          "northeast": { "lat": 50.05546305000001, "lng": 19.93653112989272 },
+          "southwest": { "lat": 50.05215925, "lng": 19.93383147010728 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/worship_general-71.png",
+      "icon_background_color": "#7B9EB0",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/worship_christian_pinlet",
+      "name": "Wawel Cathedral",
+      "opening_hours": { "open_now": false },
+      "photos": [
+        {
+          "height": 1000,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/108970578298065763569\">Екатерина Упит</a>"
+          ],
+          "photo_reference": "AUGGfZlKqJK_IyCool1X7AyBfvjsW7gEaCr8B89Ko_3v9eLOvr-EJ3T322QvSDiB3bMDD2nW0CQWuloj18R9DlF1kClD6nP9EhorpOlniOl7MLeE9tZNrKQlLHs1QA3xgg094LOTd39h7haLp2YxG7xXXrAJs5oflwTWfh5rTBhIk1_-xVPE",
+          "width": 1500
+        }
+      ],
+      "place_id": "ChIJY7-qdG1bFkcRJ3ataT_e_Hg",
+      "plus_code": { "compound_code": "3W3P+V5 Kraków", "global_code": "9F2X3W3P+V5" },
+      "rating": 4.8,
+      "reference": "ChIJY7-qdG1bFkcRJ3ataT_e_Hg",
+      "types": [
+        "tourist_attraction",
+        "church",
+        "place_of_worship",
+        "point_of_interest",
+        "establishment"
+      ],
+      "user_ratings_total": 31502
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "31-041 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0599245, "lng": 19.9414307 },
+        "viewport": {
+          "northeast": { "lat": 50.06127432989273, "lng": 19.94278052989272 },
+          "southwest": { "lat": 50.05857467010728, "lng": 19.94008087010727 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/park-71.png",
+      "icon_background_color": "#4DB546",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/tree_pinlet",
+      "name": "Planty",
+      "opening_hours": { "open_now": true },
+      "photos": [
+        {
+          "height": 6192,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/114457828387485715622\">Michał</a>"
+          ],
+          "photo_reference": "AUGGfZkYbjp-7Dl2RRg_EFWpKrJcD3coldPe-hIceoQput43nhIh9mkU4If4fqJuPW-7mEBt5hZULPBqBBaiV3JDtDuYda1rhRgrbg-PKJxx5rrge7GOXADlaPIem4vHopmUrRJ3gfOtmSn2f_iUJLtOp9e8_0ZtxagytaMV-ufQdw6U2rWs",
+          "width": 8256
+        }
+      ],
+      "place_id": "ChIJbUElEhJbFkcRXzAqMneGkjk",
+      "plus_code": { "compound_code": "3W5R+XH Kraków", "global_code": "9F2X3W5R+XH" },
+      "rating": 4.7,
+      "reference": "ChIJbUElEhJbFkcRXzAqMneGkjk",
+      "types": ["park", "tourist_attraction", "point_of_interest", "establishment"],
+      "user_ratings_total": 20910
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Unnamed Road, 30-001 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.05348360000001, "lng": 19.9329383 },
+        "viewport": {
+          "northeast": { "lat": 50.05483342989272, "lng": 19.93428812989272 },
+          "southwest": { "lat": 50.05213377010728, "lng": 19.93158847010728 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+      "icon_background_color": "#13B5C7",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+      "name": "Avenue of Stars",
+      "opening_hours": { "open_now": true },
+      "photos": [
+        {
+          "height": 1944,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/101005214196924700506\">Павел Воркевич</a>"
+          ],
+          "photo_reference": "AUGGfZkBATn4fKSa8xaNhTA9qiBvRJwmWm_z47kmMEQuKCzcKp37SWvMpTEiFePFGA50cmWXSh19KT9veb7tMfetng7RzNMjCs5KQfHJX_owlwPgipI7sos_PeyLsd3wnQy_H1sr9fEHHukDcRe4AGdDJVyBOSTk3cniLaOsJw4-uoTfIXTT",
+          "width": 2592
+        }
+      ],
+      "place_id": "ChIJEzVS6m1bFkcRLrnUf1ziPhI",
+      "plus_code": { "compound_code": "3W3M+95 Kraków", "global_code": "9F2X3W3M+95" },
+      "rating": 4.4,
+      "reference": "ChIJEzVS6m1bFkcRLrnUf1ziPhI",
+      "types": ["tourist_attraction", "point_of_interest", "establishment"],
+      "user_ratings_total": 168
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Daniłowicza 10, 32-020 Wieliczka, Poland",
+      "geometry": {
+        "location": { "lat": 49.9834763, "lng": 20.0537964 },
+        "viewport": {
+          "northeast": { "lat": 49.98477867989272, "lng": 20.05770555 },
+          "southwest": { "lat": 49.98207902010727, "lng": 20.05249335000001 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+      "icon_background_color": "#13B5C7",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+      "name": "Wieliczka Salt Mine",
+      "opening_hours": { "open_now": true },
+      "photos": [
+        {
+          "height": 3024,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/112035767003366832264\">Ian Wickenden</a>"
+          ],
+          "photo_reference": "AUGGfZmmoMOHR5_Rjl3c7Y7SU-6IUfambsNhd-Bux92-WPbM58OE6UK5R-TOyvyFv5QezxrqJ3NS0gOt469S54wYfIyIFbKd5-oYkzj_J5P6DWUPEEOLTg3Vulmk1B6Sd6MDcRIlz61BNKFea_zoxiwJLI4jIaHjKFEifxhDEWt3aV5kb8kn",
+          "width": 4032
+        }
+      ],
+      "place_id": "ChIJS46BBdhDFkcRFbST_a5JJZc",
+      "plus_code": { "compound_code": "X3M3+9G Wieliczka", "global_code": "8GX2X3M3+9G" },
+      "rating": 4.6,
+      "reference": "ChIJS46BBdhDFkcRFbST_a5JJZc",
+      "types": ["tourist_attraction", "museum", "point_of_interest", "establishment"],
+      "user_ratings_total": 25432
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Stare Miasto, Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0530183, "lng": 19.9335845 },
+        "viewport": {
+          "northeast": { "lat": 50.05629095, "lng": 19.93610839999999 },
+          "southwest": { "lat": 50.05118675000001, "lng": 19.9325236 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+      "icon_background_color": "#13B5C7",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+      "name": "Wawel Dragon",
+      "opening_hours": { "open_now": true },
+      "photos": [
+        {
+          "height": 3464,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/106403731483609630769\">MrPlmati</a>"
+          ],
+          "photo_reference": "AUGGfZlaSLIZPkdnN8f9bCvkdvI5IzyrGMP0yDU9HtNElQ_8tsOsB_uu2gX_B4aogZxRpBdNUYRS6_3RypTOD9fZlx5n--U8XFIdj6lyyWkdkR9xZCY12-B_VQ7L-Wkj_CwuVb8p0m0e1gGLAqbMx-c_RtO5ykgWb0j-cub4KBST5jliLRxw",
+          "width": 4618
+        }
+      ],
+      "place_id": "ChIJiUzN6m1bFkcRaH3Imcxil4k",
+      "plus_code": { "compound_code": "3W3M+6C Kraków", "global_code": "9F2X3W3M+6C" },
+      "rating": 4.6,
+      "reference": "ChIJiUzN6m1bFkcRaH3Imcxil4k",
+      "types": ["tourist_attraction", "point_of_interest", "establishment"],
+      "user_ratings_total": 22132
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "31-003 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.05447969999999, "lng": 19.9370548 },
+        "viewport": {
+          "northeast": { "lat": 50.05582952989271, "lng": 19.93840462989272 },
+          "southwest": { "lat": 50.05312987010727, "lng": 19.93570497010728 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+      "icon_background_color": "#13B5C7",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+      "name": "Reprezentacyjne Komnaty Królewskie",
+      "opening_hours": { "open_now": false },
+      "photos": [
+        {
+          "height": 4032,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/114303941385158329479\">Marina Dorozhanova</a>"
+          ],
+          "photo_reference": "AUGGfZmiW4hzyuDz2QuLafwoABmerrO1mpaaxXLULNDenlXH5tUmoncvXczYi2kJtKmVvLX0Y_4iHQZL8AiamyguJVEgjZB7qyvOpbaVK_Mp5T-h8_8TWdLCPD8W9m0C5vTrVP83wyYQtpgESaBEHERjeB8eiyB6k87rbUueHQ5h8yqxnj-m",
+          "width": 3024
+        }
+      ],
+      "place_id": "ChIJQXbt4mxbFkcR3BlY3v-xf0Q",
+      "plus_code": { "compound_code": "3W3P+QR Kraków", "global_code": "9F2X3W3P+QR" },
+      "rating": 4.5,
+      "reference": "ChIJQXbt4mxbFkcR3BlY3v-xf0Q",
+      "types": ["tourist_attraction", "point_of_interest", "establishment"],
+      "user_ratings_total": 315
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "al. Jana Pawła II 39, 31-864 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0774313, "lng": 19.9913072 },
+        "viewport": {
+          "northeast": { "lat": 50.07825352989272, "lng": 19.9921227 },
+          "southwest": { "lat": 50.07555387010728, "lng": 19.9888607 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/museum-71.png",
+      "icon_background_color": "#13B5C7",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/museum_pinlet",
+      "name": "Polish Aviation Museum",
+      "opening_hours": { "open_now": false },
+      "photos": [
+        {
+          "height": 3472,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/111475924862352353296\">Dawid Żurawski</a>"
+          ],
+          "photo_reference": "AUGGfZkl9GvHvoyJppdzAYUfTBco7deQJBMbLGLWD0B-AudFrHT_ZSXGo-UrlQUkksHyVHaxkQlfeChM1oK8o2WtOhjI0JKf02Qax6Q2AKWiGFy5K-JIWWRafLbK_gqGeSD_4jgtWYfYj9HJyahTySctn12DNg3nkmyk3ynI6XeAMAJBlJ4s",
+          "width": 4640
+        }
+      ],
+      "place_id": "ChIJ39ffX9JaFkcR86cKqC04JVg",
+      "plus_code": { "compound_code": "3XGR+XG Kraków", "global_code": "9F2X3XGR+XG" },
+      "rating": 4.7,
+      "reference": "ChIJ39ffX9JaFkcR86cKqC04JVg",
+      "types": ["museum", "tourist_attraction", "point_of_interest", "establishment"],
+      "user_ratings_total": 13926
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Wawel 5, 31-001 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0530031, "lng": 19.9335826 },
+        "viewport": {
+          "northeast": { "lat": 50.05435292989273, "lng": 19.93493242989272 },
+          "southwest": { "lat": 50.05165327010728, "lng": 19.93223277010728 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+      "icon_background_color": "#13B5C7",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+      "name": "Smocza Jama",
+      "opening_hours": { "open_now": false },
+      "photos": [
+        {
+          "height": 3265,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/109104673503451209616\">Vladas Portapas</a>"
+          ],
+          "photo_reference": "AUGGfZlKS1v23k7YyJZbBv0sIdkqm9_La-GAtOa30TSR5qZv9PXWTdK-B6Ok_-oFAdKkZe5jzvw6CIDCJhrmPTzxoNbE-rD3denQAP6fcxl-_LUEaqiQ_A7ycak_iGqjXyK5gGbEOU92ZL7dtQ8OQOk1tQFxX8zgOieioa_ezTQZqaXLZXeu",
+          "width": 4898
+        }
+      ],
+      "place_id": "ChIJ96dOkG1bFkcRGqZOv1nYNFk",
+      "plus_code": { "compound_code": "3W3M+6C Kraków", "global_code": "9F2X3W3M+6C" },
+      "rating": 4.3,
+      "reference": "ChIJ96dOkG1bFkcRGqZOv1nYNFk",
+      "types": ["tourist_attraction", "point_of_interest", "establishment"],
+      "user_ratings_total": 1939
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "30-002, Grodzka 14, 33-332 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0595531, "lng": 19.9380345 },
+        "viewport": {
+          "northeast": { "lat": 50.06072617989273, "lng": 19.93926847989272 },
+          "southwest": { "lat": 50.05802652010728, "lng": 19.93656882010728 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+      "icon_background_color": "#7B9EB0",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+      "name": "Lustrzany Labirynt",
+      "opening_hours": { "open_now": false },
+      "photos": [
+        {
+          "height": 4032,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/105480691994179364638\">Sebastian Urbański</a>"
+          ],
+          "photo_reference": "AUGGfZk1iIctloKd3fUwdhsssd0fGN3OV-WgmNqB4xX1ARhDP9ZxvxwYPhDK7Wa4Cwt9ZN9EuZZna3Xrck49kpb__mELJJ0Tw7EpcbSMUmOa9-qaNnJRt3pGHMCv-uxbD9wXc1Z9V4BkS9slV9bnof3OFoinIDQJy_nqBBlPt8rPXwoVYvMu",
+          "width": 3024
+        }
+      ],
+      "place_id": "ChIJEcaQbxJbFkcR3p5Xq9m9dEE",
+      "plus_code": { "compound_code": "3W5Q+R6 Kraków", "global_code": "9F2X3W5Q+R6" },
+      "rating": 4.2,
+      "reference": "ChIJEcaQbxJbFkcR3p5Xq9m9dEE",
+      "types": ["amusement_park", "tourist_attraction", "point_of_interest", "establishment"],
+      "user_ratings_total": 4653
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "al. Waszyngtona 1, 30-204 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.054946, "lng": 19.8927057 },
+        "viewport": {
+          "northeast": { "lat": 50.05647757989272, "lng": 19.89422152989272 },
+          "southwest": { "lat": 50.05377792010728, "lng": 19.89152187010728 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/museum-71.png",
+      "icon_background_color": "#13B5C7",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/museum_pinlet",
+      "name": "Kościuszko Mound",
+      "opening_hours": { "open_now": false },
+      "photos": [
+        {
+          "height": 3948,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/102838531708548004686\">Kopiec Tadeusza Kościuszki</a>"
+          ],
+          "photo_reference": "AUGGfZkh5SHKhpsizWTb0_0E2LoIrclLSieEF3ZtOG094UYnW8-Bqp_L59x68a28l-Atl2s_gPM-IeFMi8ozFvpfh-4OXVCc59LxZAkonYPpQlupPw-EEEinxZHuIVaoBbeIMLwNgxF9HYmpy3riGi2AVTMbn9VYKmvIOc9P8-1UOeygtKub",
+          "width": 5272
+        }
+      ],
+      "place_id": "ChIJnYyClpFbFkcRM1wE20RBCGc",
+      "plus_code": { "compound_code": "3V3V+W4 Kraków", "global_code": "9F2X3V3V+W4" },
+      "rating": 4.6,
+      "reference": "ChIJnYyClpFbFkcRM1wE20RBCGc",
+      "types": ["museum", "tourist_attraction", "point_of_interest", "establishment"],
+      "user_ratings_total": 20665
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Stradomska 15, 31-068 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0528167, "lng": 19.9400761 },
+        "viewport": {
+          "northeast": { "lat": 50.05415777989272, "lng": 19.94144437989272 },
+          "southwest": { "lat": 50.05145812010727, "lng": 19.93874472010728 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/museum-71.png",
+      "icon_background_color": "#13B5C7",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/museum_pinlet",
+      "name": "Kraków Pinball Museum",
+      "opening_hours": { "open_now": false },
+      "photos": [
+        {
+          "height": 3024,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/113716581420908997004\">A Google User</a>"
+          ],
+          "photo_reference": "AUGGfZkVtTMEOYuEGVWcl4JfHIke_vsZQTzSf8eBYQKNKd4AEwbvE6P3S8lol9UA4CVX-Id1n6RQVJhYEm3CKBt_4D_xMXHVTKptdaJKSkD-koM1fRJWO5zGNwY65hi4F-hxLc3lByAmuRrPJ4q2q22U2ZhJHP9TK1y1eM8QblaV6DiwKI_4",
+          "width": 4032
+        }
+      ],
+      "place_id": "ChIJqQHFeGxbFkcR3c_BfwOqs6Y",
+      "plus_code": { "compound_code": "3W3R+42 Kraków", "global_code": "9F2X3W3R+42" },
+      "rating": 4.8,
+      "reference": "ChIJqQHFeGxbFkcR3c_BfwOqs6Y",
+      "types": ["museum", "tourist_attraction", "point_of_interest", "establishment"],
+      "user_ratings_total": 2934
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Rynek Główny 1, 30-001 Kraków, Poland",
+      "geometry": {
+        "location": { "lat": 50.0615295, "lng": 19.9364793 },
+        "viewport": {
+          "northeast": { "lat": 50.06272947989272, "lng": 19.93770462989272 },
+          "southwest": { "lat": 50.06002982010727, "lng": 19.93500497010728 }
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/museum-71.png",
+      "icon_background_color": "#13B5C7",
+      "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/museum_pinlet",
+      "name": "Town Hall Tower",
+      "opening_hours": { "open_now": false },
+      "photos": [
+        {
+          "height": 4032,
+          "html_attributions": [
+            "<a href=\"https://maps.google.com/maps/contrib/106350100785264704283\">Bogdan</a>"
+          ],
+          "photo_reference": "AUGGfZnANvjzw54V0wCzWPfoh7TEigjMUkSlhU-S5c2Ltx3bVNvbasIck6rHYaerTNF2s8OiuTYeE50_xfCBh7z5vG-LvLV0mTEnmGE3s1huNHugPNdoAtW_2R6di3ZAOVXJtgXTmPSgkrVA6QtrGQJfzj3NkeXaCtrY8k8KZubq2p1o-nW3",
+          "width": 2016
+        }
+      ],
+      "place_id": "ChIJsf5l4Q1bFkcR7pjruKeJvgo",
+      "plus_code": { "compound_code": "3W6P+JH Kraków", "global_code": "9F2X3W6P+JH" },
+      "rating": 4.5,
+      "reference": "ChIJsf5l4Q1bFkcR7pjruKeJvgo",
+      "types": ["museum", "point_of_interest", "establishment"],
+      "user_ratings_total": 2153
+    }
+]

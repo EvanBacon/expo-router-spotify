@@ -1,0 +1,4 @@
+{
+  // use local typescript
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
