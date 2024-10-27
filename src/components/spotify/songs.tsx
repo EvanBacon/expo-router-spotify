@@ -18,7 +18,6 @@ export function SongItem({
     <ExternalLink href={href}>
       <View style={{ alignItems: "center", gap: 8, maxWidth: SIZE }}>
         <Image
-          // title={title},
           source={{ uri: image }}
           style={{
             width: SIZE,
@@ -27,16 +26,6 @@ export function SongItem({
             backgroundColor: "rgb(205, 205, 205)",
             borderRadius: 8,
           }}
-          // menuItems={[
-          //   {
-          //     title: "More like this",
-          //     icon: "music.note",
-          //     prompt: [
-          //       "Find more songs like this",
-          //       `Play more songs like "${title}" by "${artist}"`,
-          //     ],
-          //   },
-          // ]}
         />
 
         <View style={{ alignItems: "center", gap: 4 }}>

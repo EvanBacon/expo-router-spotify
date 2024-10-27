@@ -33,7 +33,7 @@ export default function SpotifyCard() {
 
   React.useEffect(() => {
     if (response?.type === "success") {
-      spotifyAuth.exchangeAuthCodeAsync({
+      spotifyAuth?.exchangeAuthCodeAsync({
         code: response.params.code,
         redirectUri,
       });

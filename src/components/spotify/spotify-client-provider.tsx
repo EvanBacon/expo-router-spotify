@@ -10,6 +10,7 @@ import {
   SpotifySongData,
 } from "./spotify-validation";
 import * as WebBrowser from "expo-web-browser";
+import { SongItem } from "./songs";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -22,7 +23,7 @@ export const SpotifyAuthContext = React.createContext<{
   searchSongs: (props: {
     query: string;
     limit?: number;
-  }) => Promise<SpotifySongData | null>;
+  }) => Promise<React.ReactElement>;
   exchangeAuthCodeAsync: (props: {
     code: string;
     redirectUri: string;
@@ -49,10 +50,6 @@ export function SpotifyClientAuthProvider({
     scope?: string;
   }>;
 }) {
-  //   const [, setMessageState] = useUIState<typeof AI>();
-  //   const [aiState, setAIState] = useAIState<typeof AI>();
-  //   const id = React.useId();
-
   const [accessObjectString, setAccessToken] = React.useState<string | null>(
     localStorage.getItem(cacheKey)
   );
@@ -133,41 +130,22 @@ export function SpotifyClientAuthProvider({
       err.statusCode = res.error.status;
       throw err;
     }
-    //   res.tracks.items = res.tracks.items.map(({ available_markets, ...track }) => track);
-    return res;
+
+    return (
+      <>
+        {res.tracks.items.map((track: any) => (
+          <SongItem
+            href={track.external_urls.spotify}
+            key={track.id}
+            image={track.album.images[0].url}
+            title={track.name}
+            artist={track.artists.map((artist) => artist.name).join(", ")}
+          />
+        ))}
+      </>
+    );
+    // return res;
   };
-
-  //   React.useEffect(() => {
-  //     if (accessObject.access_token) {
-  //       // console.log('>>>', aiState);
-  //       // Insert a new message into the AI state.
-  //       const info = {
-  //         role: 'assistant' as const,
-  //         name: 'spotify_access_token',
-  //         content: accessObject.access_token,
-
-  //         // Identifier of this UI component, so we don't insert it many times.
-  //         id,
-  //       };
-  //       console.log(info);
-
-  //       setMessageState((messages) => [
-  //         ...messages.filter((message) => message.id !== id),
-  //         {
-  //           id,
-  //           display: <AssistantMessage>{`[Authorize with Spotify]`}</AssistantMessage>,
-  //         },
-  //       ]);
-
-  //       setAIState((aiState) => {
-  //         return [...aiState.filter((item) => item.id !== id), info];
-  //       });
-  //     } else {
-  //       setMessageState((messages) => [...messages.filter((message) => message.id !== id)]);
-
-  //       setAIState((aiState) => aiState.filter((item) => item.id !== id));
-  //     }
-  //   }, [accessObject?.access_token]);
 
   return (
     <SpotifyAuthContext
