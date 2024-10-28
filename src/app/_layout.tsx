@@ -1,12 +1,12 @@
 import "server-only";
 
 import { Slot } from "expo-router";
-import { SpotifyAuthProvider } from "@/components/spotify/spotify-provider";
+import { SpotifyClientAuthProvider } from "@/components/spotify/spotify-client-provider";
 
 export default function Page() {
   return (
-    <SpotifyAuthProvider cacheKey="spotify-access-token-1">
+    <SpotifyClientAuthProvider cacheKey="spotify-access-token-1">
       <Slot />
-    </SpotifyAuthProvider>
+    </SpotifyClientAuthProvider>
   );
 }

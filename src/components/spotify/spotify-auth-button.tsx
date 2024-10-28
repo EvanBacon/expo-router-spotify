@@ -2,7 +2,11 @@
 
 import * as React from "react";
 
-import { makeRedirectUri, useAuthRequest } from "expo-auth-session";
+import {
+  AuthSessionResult,
+  makeRedirectUri,
+  useAuthRequest,
+} from "expo-auth-session";
 import { SpotifyBrandButton } from "./spotify-brand-button";
 import { SpotifyAuthContext } from "./spotify-client-provider";
 
@@ -16,10 +20,21 @@ const redirectUri = makeRedirectUri({
   scheme: "exai",
 });
 
-export default function SpotifyCard() {
+function useExchangeCallback() {
   const spotifyAuth = React.use(SpotifyAuthContext);
 
-  const [request, response, promptAsync] = useAuthRequest(
+  return React.useCallback((response: AuthSessionResult) => {
+    if (response?.type === "success") {
+      spotifyAuth?.exchangeAuthCodeAsync({
+        code: response.params.code,
+        redirectUri,
+      });
+    }
+  }, []);
+}
+
+export default function SpotifyCard() {
+  const [request, , promptAsync] = useAuthRequest(
     {
       clientId: process.env.EXPO_PUBLIC_SPOTIFY_CLIENT_ID!,
       scopes: ["user-read-email", "playlist-modify-public"],
@@ -31,14 +46,7 @@ export default function SpotifyCard() {
     discovery
   );
 
-  React.useEffect(() => {
-    if (response?.type === "success") {
-      spotifyAuth?.exchangeAuthCodeAsync({
-        code: response.params.code,
-        redirectUri,
-      });
-    }
-  }, [response]);
+  const exchange = useExchangeCallback();
 
   return (
     <SpotifyBrandButton
@@ -46,7 +54,7 @@ export default function SpotifyCard() {
       style={{ margin: 16 }}
       title="Login with Spotify"
       onPress={() => {
-        promptAsync();
+        promptAsync().then(exchange);
       }}
     />
   );
