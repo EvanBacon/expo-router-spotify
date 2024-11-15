@@ -13,6 +13,8 @@ import {
   exchangeAuthCodeAsync,
   refreshTokenAsync,
 } from "./auth-server-actions";
+import { useSpotifyAuthRequest } from "./spotify-auth-session-provider";
+import { AuthRequestConfig } from "expo-auth-session";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -26,12 +28,17 @@ export const SpotifyAuthContext = React.createContext<{
     code: string;
     redirectUri: string;
   }) => Promise<any>;
+  useSpotifyAuthRequest: (
+    config?: Partial<AuthRequestConfig>
+  ) => ReturnType<typeof useSpotifyAuthRequest>;
 } | null>(null);
 
 export function SpotifyClientAuthProvider({
+  config,
   children,
   cacheKey = "spotify-access-token",
 }: {
+  config: AuthRequestConfig;
   children: React.ReactNode;
   cacheKey?: string;
 }) {
@@ -59,14 +66,27 @@ export function SpotifyClientAuthProvider({
     localStorage.setItem(cacheKey, str);
   };
 
+  const exchangeAuthCodeAndCacheAsync = async (code: string) => {
+    const res = await exchangeAuthCodeAsync({
+      code,
+      redirectUri: config.redirectUri,
+    });
+    storeAccessToken(res);
+    return res;
+  };
+
   return (
     <SpotifyAuthContext.Provider
       value={{
-        async exchangeAuthCodeAsync(props) {
-          const res = await exchangeAuthCodeAsync(props);
-          storeAccessToken(res);
-          return res;
-        },
+        useSpotifyAuthRequest: (innerConfig) =>
+          useSpotifyAuthRequest(
+            { exchangeAuthCodeAsync: exchangeAuthCodeAndCacheAsync },
+            {
+              ...config,
+              ...innerConfig,
+            }
+          ),
+        exchangeAuthCodeAsync: exchangeAuthCodeAndCacheAsync,
         async getFreshAccessToken() {
           if (!accessObject) {
             throw new Error("Cannot refresh token without an access object");

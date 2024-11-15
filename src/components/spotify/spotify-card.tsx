@@ -5,7 +5,7 @@
 import * as React from "react";
 import { Text, Button, ScrollView, View } from "react-native";
 
-import SpotifyButton, { SpotifyProxyButton } from "./spotify-auth-button";
+import SpotifyButton from "./spotify-auth-button";
 import { SpotifyBrandButton } from "./spotify-brand-button";
 import { SongItemSkeleton } from "./songs";
 import { SpotifyAuthContext } from "./spotify-client-provider";
@@ -16,9 +16,6 @@ export default function SpotifyCard({ query }: { query: string }) {
   const spotifyAuth = React.use(SpotifyAuthContext);
 
   if (!spotifyAuth?.accessToken) {
-    if (process.env.EXPO_OS === "ios") {
-      return <SpotifyProxyButton />;
-    }
     return <SpotifyButton />;
   }
 
