@@ -10,6 +10,7 @@ import { SpotifyBrandButton } from "./spotify-brand-button";
 import { SongItemSkeleton } from "./songs";
 import { SpotifyAuthContext } from "./spotify-client-provider";
 import { Try } from "expo-router/build/views/Try";
+import { SpotifyActionsContext } from "./spotify-actions";
 
 export default function SpotifyCard({ query }: { query: string }) {
   const spotifyAuth = React.use(SpotifyAuthContext);
@@ -20,6 +21,12 @@ export default function SpotifyCard({ query }: { query: string }) {
     }
     return <SpotifyButton />;
   }
+
+  return <AuthenticatedPage query={query} />;
+}
+
+function AuthenticatedPage({ query }: { query: string }) {
+  const actions = React.use(SpotifyActionsContext);
 
   return (
     <>
@@ -40,16 +47,24 @@ export default function SpotifyCard({ query }: { query: string }) {
               </>
             }
           >
-            {spotifyAuth.searchSongs({ query, limit: 15 })}
+            {actions!.renderSongsAsync({ query, limit: 15 })}
           </React.Suspense>
         </Try>
       </ScrollView>
-      <SpotifyBrandButton
-        title="Logout"
-        style={{ marginHorizontal: 16, marginBottom: 16 }}
-        onPress={() => spotifyAuth.clearAccessToken()}
-      />
+      <LogoutButton />
     </>
+  );
+}
+
+function LogoutButton() {
+  const spotifyAuth = React.use(SpotifyAuthContext);
+
+  return (
+    <SpotifyBrandButton
+      title="Logout"
+      style={{ marginHorizontal: 16, marginBottom: 16 }}
+      onPress={() => spotifyAuth!.clearAccessToken()}
+    />
   );
 }
 

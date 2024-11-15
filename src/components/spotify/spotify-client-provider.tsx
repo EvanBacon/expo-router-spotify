@@ -14,8 +14,6 @@ import {
   refreshTokenAsync,
 } from "./auth-server-actions";
 
-import { renderSongsAsync } from "./spotify-server-actions";
-
 WebBrowser.maybeCompleteAuthSession();
 
 export const SpotifyAuthContext = React.createContext<{
@@ -24,10 +22,6 @@ export const SpotifyAuthContext = React.createContext<{
   setAccessToken: (access: SpotifyCodeExchangeResponse) => void;
   clearAccessToken: () => void;
   getFreshAccessToken: () => Promise<SpotifyCodeExchangeResponse>;
-  searchSongs: (props: {
-    query: string;
-    limit?: number;
-  }) => Promise<React.ReactElement>;
   exchangeAuthCodeAsync: (props: {
     code: string;
     redirectUri: string;
@@ -36,10 +30,10 @@ export const SpotifyAuthContext = React.createContext<{
 
 export function SpotifyClientAuthProvider({
   children,
-  cacheKey,
+  cacheKey = "spotify-access-token",
 }: {
   children: React.ReactNode;
-  cacheKey: string;
+  cacheKey?: string;
 }) {
   const [accessObjectString, setAccessToken] = React.useState<string | null>(
     localStorage.getItem(cacheKey)
@@ -59,75 +53,57 @@ export function SpotifyClientAuthProvider({
     }
   }, [accessObjectString]);
 
-  const clearAccessToken = () => {
-    setAccessToken(null);
-    localStorage.removeItem(cacheKey);
-  };
-
   const storeAccessToken = (token: SpotifyCodeExchangeResponse) => {
     const str = JSON.stringify(token);
     setAccessToken(str);
     localStorage.setItem(cacheKey, str);
   };
 
-  const getFreshAccessToken = async () => {
-    if (!accessObject) return null;
-    if (accessObject.expires_in >= Date.now()) {
-      console.log(
-        "[SPOTIFY]: Token still valid. Refreshing in: ",
-        accessObject.expires_in - Date.now()
-      );
-      return accessObject;
-    }
-    console.log(
-      "[SPOTIFY]: Token expired. Refreshing:",
-      accessObject.refresh_token
-    );
-    const nextAccessObject = await refreshTokenAsync(
-      accessObject.refresh_token
-    );
-    storeAccessToken(nextAccessObject);
-    return nextAccessObject;
-  };
-
-  const renderSongsWithAuthAsync = async ({
-    query,
-    limit,
-  }: {
-    query: string;
-    limit: number;
-  }) => {
-    if (!accessObject) {
-      return null;
-    }
-
-    const auth = await getFreshAccessToken();
-
-    if (!auth) {
-      return null;
-    }
-
-    return renderSongsAsync(auth, { query, limit });
-  };
-
   return (
-    <SpotifyAuthContext
+    <SpotifyAuthContext.Provider
       value={{
-        exchangeAuthCodeAsync: async (props) => {
+        async exchangeAuthCodeAsync(props) {
           const res = await exchangeAuthCodeAsync(props);
           storeAccessToken(res);
           return res;
         },
-        searchSongs: renderSongsWithAuthAsync,
+        async getFreshAccessToken() {
+          if (!accessObject) {
+            throw new Error("Cannot refresh token without an access object");
+          }
+          if (accessObject.expires_in >= Date.now()) {
+            console.log(
+              "[SPOTIFY]: Token still valid. Refreshing in: ",
+              accessObject.expires_in - Date.now()
+            );
+            return accessObject;
+          }
+          if (!accessObject.refresh_token) {
+            throw new Error(
+              "Cannot refresh access because the access object does not contain a refresh token"
+            );
+          }
 
-        getFreshAccessToken,
+          console.log(
+            "[SPOTIFY]: Token expired. Refreshing:",
+            accessObject.refresh_token
+          );
+          const nextAccessObject = await refreshTokenAsync(
+            accessObject.refresh_token
+          );
+          storeAccessToken(nextAccessObject);
+          return nextAccessObject;
+        },
         accessToken: accessObject?.access_token ?? null,
         auth: accessObject ?? null,
         setAccessToken: storeAccessToken,
-        clearAccessToken,
+        clearAccessToken() {
+          setAccessToken(null);
+          localStorage.removeItem(cacheKey);
+        },
       }}
     >
       {children}
-    </SpotifyAuthContext>
+    </SpotifyAuthContext.Provider>
   );
 }
