@@ -40,9 +40,7 @@ export default function SpotifyCard() {
         }}
       />
       <BodyScrollView>
-        <UserPlaylists />
         <AuthenticatedPage />
-        {/* <LogoutButton /> */}
       </BodyScrollView>
     </>
   );
@@ -52,7 +50,7 @@ function AuthenticatedPage() {
   const text = useHeaderSearch();
 
   if (!text) {
-    return <Text style={{ margin: 16 }}>Search for songs</Text>;
+    return <UserPlaylists />;
   }
 
   return (
