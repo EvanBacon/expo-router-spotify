@@ -5,10 +5,13 @@ import React from "react";
 import { SongItem } from "../songs";
 
 import type { SpotifySongData } from "@/lib/spotify-auth";
+import { Button, Text, View } from "react-native";
+import UserPlaylistsServer from "./user-playlists-server";
+import { Stack } from "expo-router";
 
 // Get user's playlists
 // Types for Spotify API responses
-interface SpotifyPaging<T> {
+export interface SpotifyPaging<T> {
   href: string;
   items: T[];
   limit: number;
@@ -18,7 +21,7 @@ interface SpotifyPaging<T> {
   total: number;
 }
 
-interface SpotifyPlaylist {
+export interface SpotifyPlaylist {
   collaborative: boolean;
   description: string | null;
   external_urls: {
@@ -58,7 +61,7 @@ interface SpotifyImage {
   width: number | null;
 }
 
-interface SpotifyArtist {
+export interface SpotifyArtist {
   id: string;
   name: string;
   images: SpotifyImage[];
@@ -71,7 +74,7 @@ interface SpotifyArtist {
   };
 }
 
-interface SpotifyAlbum {
+export interface SpotifyAlbum {
   id: string;
   name: string;
   images: SpotifyImage[];
@@ -81,15 +84,6 @@ interface SpotifyAlbum {
   external_urls: {
     spotify: string;
   };
-}
-
-interface SpotifyPaging<T> {
-  items: T[];
-  total: number;
-  limit: number;
-  offset: number;
-  next: string | null;
-  previous: string | null;
 }
 
 // Helper function to handle Spotify API responses
@@ -155,48 +149,23 @@ export const getUserPlaylists = async (
     }
   ).then(handleSpotifyResponse)) as SpotifyPaging<SpotifyPlaylist>;
 
+  //   console.log("DATA", data.items[0].);
   // Handle empty response
   if (!data?.items?.length) {
     return (
-      <div className="text-center p-4 text-gray-500">No playlists found</div>
+      <Text
+        style={{
+          alignItems: "center",
+          padding: 16,
+          color: "#6b7280",
+        }}
+      >
+        No playlists found
+      </Text>
     );
   }
 
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {data.items.map((playlist) => {
-        // Get the best quality image, or use placeholder if no images
-        const imageUrl = playlist.images[0]?.url ?? "/placeholder.png";
-
-        return (
-          <div
-            key={playlist.id}
-            className="p-4 border rounded-lg hover:shadow-md transition-shadow"
-          >
-            <img
-              src={imageUrl}
-              alt={`${playlist.name} playlist cover`}
-              className="w-full aspect-square object-cover rounded-md bg-gray-100"
-            />
-            <h3 className="font-semibold mt-2 truncate" title={playlist.name}>
-              {playlist.name}
-            </h3>
-            <p className="text-sm text-gray-600 flex items-center justify-between">
-              <span>{playlist.tracks.total} tracks</span>
-              <span className="text-xs">
-                {playlist.public ? "Public" : "Private"}
-              </span>
-            </p>
-            {playlist.description && (
-              <p className="text-xs text-gray-500 mt-1 line-clamp-2">
-                {playlist.description}
-              </p>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
+  return <UserPlaylistsServer data={data} dom={{ matchContents: true }} />;
 };
 
 // Get user's top tracks
@@ -640,5 +609,39 @@ export const getCategoryPlaylists = async (
         </div>
       ))}
     </div>
+  );
+};
+
+export const renderPlaylistAsync = async (
+  auth: { access_token: string },
+  { playlistId }: { playlistId: string }
+) => {
+  const data = await fetch(
+    `https://api.spotify.com/v1/playlists/${playlistId}`,
+    {
+      headers: { Authorization: `Bearer ${auth.access_token}` },
+    }
+  ).then(handleSpotifyResponse);
+
+  console.log("DATA", data);
+  return (
+    <>
+      <Stack.Screen
+        options={{
+          title: data.name,
+        }}
+      />
+      <View className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {data.tracks.items.map((item) => (
+          <SongItem
+            href={item.track.external_urls.spotify}
+            key={item.track.id}
+            image={item.track?.album?.images?.[0]?.url}
+            title={item.track.name}
+            artist={item.track.artists.map((artist) => artist.name).join(", ")}
+          />
+        ))}
+      </View>
+    </>
   );
 };

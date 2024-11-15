@@ -13,6 +13,9 @@ import { useSpotifyAuth } from "@/lib/spotify-auth";
 import { Try } from "expo-router/build/views/Try";
 import { useHeaderSearch } from "@/hooks/useHeaderSearch";
 import { useSpotifyActions } from "@/components/api";
+import { BodyScrollView } from "@/components/ui/body";
+import { Stack } from "expo-router";
+import { UserPlaylists } from "@/components/user-playlists";
 
 export default function SpotifyCard() {
   const spotifyAuth = useSpotifyAuth();
@@ -23,8 +26,24 @@ export default function SpotifyCard() {
 
   return (
     <>
-      <AuthenticatedPage />
-      <LogoutButton />
+      <Stack.Screen
+        options={{
+          title: "Spotify Profile",
+          headerRight() {
+            return (
+              <Button
+                title="Logout"
+                onPress={() => spotifyAuth.clearAccessToken()}
+              />
+            );
+          },
+        }}
+      />
+      <BodyScrollView>
+        <UserPlaylists />
+        <AuthenticatedPage />
+        {/* <LogoutButton /> */}
+      </BodyScrollView>
     </>
   );
 }

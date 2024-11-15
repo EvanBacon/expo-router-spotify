@@ -13,6 +13,7 @@ import {
   getRecentlyPlayed,
   getRecommendations,
   getSavedAlbums,
+  renderPlaylistAsync,
 } from "@/components/spotify/spotify-server-actions";
 
 export const {
@@ -30,4 +31,5 @@ export const {
   getRecentlyPlayed,
   getRecommendations,
   getSavedAlbums,
+  renderPlaylistAsync,
 });

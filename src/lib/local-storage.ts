@@ -1,4 +1,4 @@
-import { Storage } from "expo-sqlite/async-storage";
+import { Storage } from "expo-sqlite/kv-store";
 
 // localStorage polyfill. Life's too short to not have some storage API.
 if (typeof localStorage === "undefined") {

@@ -15,7 +15,7 @@ export function SongItem({
 }) {
   const SIZE = 150;
   return (
-    <Link href={href} target="_blank">
+    <Link href={href ?? "#"} target="_blank">
       <View style={{ alignItems: "center", gap: 8, maxWidth: SIZE }}>
         <Image
           source={{ uri: image }}
