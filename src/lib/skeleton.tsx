@@ -79,7 +79,7 @@ const Skeleton = ({
   }, []);
 
   React.useEffect(() => {
-    Animated.loop(
+    const anim = Animated.loop(
       Animated.sequence([
         Animated.timing(translateX, {
           delay: delay || 0,
@@ -90,7 +90,11 @@ const Skeleton = ({
           easing: Easing.in(Easing.ease),
         }),
       ])
-    ).start();
+    );
+    anim.start();
+    return () => {
+      anim.stop();
+    };
   }, [translateX]);
 
   const translateXStyle = React.useMemo(

@@ -1,5 +1,5 @@
 import { View, Text, Image } from "react-native";
-import { SkeletonBox } from "@/components/skeleton";
+import { SkeletonBox } from "@/lib/skeleton";
 import ExternalLink from "@/components/external-link";
 
 export function SongItem({
