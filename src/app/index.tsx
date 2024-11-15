@@ -53,6 +53,9 @@ function SongsScroller({ query }: { query: string }) {
                 <SongItemSkeleton />
                 <SongItemSkeleton />
                 <SongItemSkeleton />
+                <SongItemSkeleton />
+                <SongItemSkeleton />
+                <SongItemSkeleton />
               </>
             }
           >
