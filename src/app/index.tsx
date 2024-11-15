@@ -11,8 +11,8 @@ import SpotifyButton, {
 import { SongItemSkeleton } from "@/components/songs";
 import { useSpotifyAuth } from "@/lib/spotify-auth";
 import { Try } from "expo-router/build/views/Try";
-import { SpotifyActionsContext } from "@/components/spotify/spotify-actions";
 import { useHeaderSearch } from "@/hooks/useHeaderSearch";
+import { useSpotifyActions } from "@/components/api";
 
 export default function SpotifyCard() {
   const spotifyAuth = useSpotifyAuth();
@@ -21,7 +21,12 @@ export default function SpotifyCard() {
     return <SpotifyButton />;
   }
 
-  return <AuthenticatedPage />;
+  return (
+    <>
+      <AuthenticatedPage />
+      <LogoutButton />
+    </>
+  );
 }
 
 function AuthenticatedPage() {
@@ -31,11 +36,17 @@ function AuthenticatedPage() {
     return <Text style={{ margin: 16 }}>Search for songs</Text>;
   }
 
-  return <SongsScroller query={text} />;
+  return (
+    <>
+      <SongsScroller query={text} />
+    </>
+  );
 }
 
+export { SpotifyError as ErrorBoundary };
+
 function SongsScroller({ query }: { query: string }) {
-  const actions = React.use(SpotifyActionsContext);
+  const actions = useSpotifyActions();
 
   return (
     <>
@@ -63,7 +74,6 @@ function SongsScroller({ query }: { query: string }) {
           </React.Suspense>
         </Try>
       </ScrollView>
-      <LogoutButton />
     </>
   );
 }

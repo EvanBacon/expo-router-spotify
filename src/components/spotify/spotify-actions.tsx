@@ -3,44 +3,80 @@
 
 import React from "react";
 
-import { renderSongsAsync } from "./spotify-server-actions";
-import { useSpotifyAuth } from "@/lib/spotify-auth";
+// Helper type to extract the parameters excluding the first one (auth)
+type ExcludeFirstParameter<T extends (...args: any[]) => any> = T extends (
+  first: any,
+  ...rest: infer R
+) => any
+  ? (...args: R) => ReturnType<T>
+  : never;
 
-export const SpotifyActionsContext = React.createContext<{
-  renderSongsAsync: (props: {
-    query: string;
-    limit?: number;
-  }) => Promise<React.ReactElement | null>;
-} | null>(null);
+// Helper type to transform all server actions to client actions
+type TransformServerActions<T extends Record<string, Function>> = {
+  [K in keyof T]: ExcludeFirstParameter<T[K]>;
+};
 
-export function SpotifyActionsProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const authContext = useSpotifyAuth();
+// Type for the auth context
+type AuthContext = {
+  auth: { accessToken: string } | null;
+  getFreshAccessToken: () => Promise<{ access_token: string }>;
+};
 
-  return (
-    <SpotifyActionsContext.Provider
-      value={{
-        async renderSongsAsync({
-          query,
-          limit,
-        }: {
-          query: string;
-          limit?: number;
-        }) {
+export function createSpotifyAPI<
+  T extends Record<
+    string,
+    (auth: { access_token: string }, ...args: any[]) => any
+  >
+>(serverActions: T) {
+  // Create a new context with the transformed server actions
+  const SpotifyContext = React.createContext<TransformServerActions<T> | null>(
+    null
+  );
+
+  // Create the provider component
+  function SpotifyProvider({
+    children,
+    useAuth,
+  }: {
+    children: React.ReactNode;
+    useAuth: () => AuthContext;
+  }) {
+    const authContext = useAuth();
+
+    // Transform server actions to inject auth
+    const transformedActions = React.useMemo(() => {
+      const actions: Record<string, Function> = {};
+
+      for (const [key, serverAction] of Object.entries(serverActions)) {
+        actions[key] = async (...args: any[]) => {
           if (!authContext.auth) {
             return null;
           }
-          return renderSongsAsync(await authContext.getFreshAccessToken(), {
-            query,
-            limit,
-          });
-        },
-      }}
-    >
-      {children}
-    </SpotifyActionsContext.Provider>
-  );
+          return serverAction(await authContext.getFreshAccessToken(), ...args);
+        };
+      }
+
+      return actions as TransformServerActions<T>;
+    }, [authContext]);
+
+    return (
+      <SpotifyContext.Provider value={transformedActions}>
+        {children}
+      </SpotifyContext.Provider>
+    );
+  }
+
+  // Create a custom hook to use the context
+  function useSpotify() {
+    const context = React.useContext(SpotifyContext);
+    if (context === null) {
+      throw new Error("useSpotify must be used within a SpotifyProvider");
+    }
+    return context;
+  }
+
+  return {
+    Provider: SpotifyProvider,
+    useSpotify,
+  };
 }
