@@ -1,6 +1,6 @@
 import { View, Text, Image } from "react-native";
 import { SkeletonBox } from "@/lib/skeleton";
-import ExternalLink from "@/components/external-link";
+import { Link } from "expo-router";
 
 export function SongItem({
   image,
@@ -15,7 +15,7 @@ export function SongItem({
 }) {
   const SIZE = 150;
   return (
-    <ExternalLink href={href}>
+    <Link href={href} target="_blank">
       <View style={{ alignItems: "center", gap: 8, maxWidth: SIZE }}>
         <Image
           source={{ uri: image }}
@@ -43,7 +43,7 @@ export function SongItem({
           </Text>
         </View>
       </View>
-    </ExternalLink>
+    </Link>
   );
 }
 

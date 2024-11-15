@@ -15,7 +15,6 @@ export default function Page() {
         scopes: ["user-read-email", "playlist-modify-public"],
         redirectUri,
       }}
-      cacheKey="spotify-access-token-1"
     >
       <SpotifyActionsProvider>
         <Stack />

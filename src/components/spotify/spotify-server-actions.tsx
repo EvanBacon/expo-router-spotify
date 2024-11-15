@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { SongItem } from "./songs";
+import { SongItem } from "../songs";
 import type { SpotifySongData } from "@/lib/spotify-auth";
 
 export const renderSongsAsync = async (

@@ -19,3 +19,15 @@ export default function SpotifyAuthButton() {
     />
   );
 }
+
+export function LogoutButton() {
+  const spotifyAuth = useSpotifyAuth();
+
+  return (
+    <SpotifyBrandButton
+      title="Logout"
+      style={{ marginHorizontal: 16, marginBottom: 16 }}
+      onPress={() => spotifyAuth!.clearAccessToken()}
+    />
+  );
+}

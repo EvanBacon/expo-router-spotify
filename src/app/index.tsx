@@ -5,9 +5,10 @@
 import * as React from "react";
 import { Text, Button, ScrollView, View } from "react-native";
 
-import SpotifyButton from "@/components/spotify/spotify-auth-button";
-import { SpotifyBrandButton } from "@/components/spotify/spotify-brand-button";
-import { SongItemSkeleton } from "@/components/spotify/songs";
+import SpotifyButton, {
+  LogoutButton,
+} from "@/components/spotify/spotify-auth-button";
+import { SongItemSkeleton } from "@/components/songs";
 import { useSpotifyAuth } from "@/lib/spotify-auth";
 import { Try } from "expo-router/build/views/Try";
 import { SpotifyActionsContext } from "@/components/spotify/spotify-actions";
@@ -61,18 +62,6 @@ function SongsScroller({ query }: { query: string }) {
       </ScrollView>
       <LogoutButton />
     </>
-  );
-}
-
-function LogoutButton() {
-  const spotifyAuth = useSpotifyAuth();
-
-  return (
-    <SpotifyBrandButton
-      title="Logout"
-      style={{ marginHorizontal: 16, marginBottom: 16 }}
-      onPress={() => spotifyAuth!.clearAccessToken()}
-    />
   );
 }
 
