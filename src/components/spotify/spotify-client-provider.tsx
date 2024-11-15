@@ -7,14 +7,14 @@ import React from "react";
 import {
   SpotifyCodeExchangeResponse,
   SpotifyCodeExchangeResponseSchema,
-  SpotifySongData,
 } from "./spotify-validation";
 import * as WebBrowser from "expo-web-browser";
-import { SongItem } from "./songs";
 import {
   exchangeAuthCodeAsync,
   refreshTokenAsync,
 } from "./auth-server-actions";
+
+import { renderSongsAsync } from "./spotify-server-actions";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -90,52 +90,24 @@ export function SpotifyClientAuthProvider({
     return nextAccessObject;
   };
 
-  const searchSongs = async ({ query, limit }) => {
-    if (!accessObject) return null;
+  const renderSongsWithAuthAsync = async ({
+    query,
+    limit,
+  }: {
+    query: string;
+    limit: number;
+  }) => {
+    if (!accessObject) {
+      return null;
+    }
 
     const auth = await getFreshAccessToken();
 
-    //   await sleep(2000);
-    // return SONG_MOCK_DATA;
-    const res = (await fetch(
-      `https://api.spotify.com/v1/search?` +
-        new URLSearchParams({
-          q: query,
-          type: "track",
-          limit: limit?.toString() ?? "10",
-        }),
-      {
-        headers: {
-          Authorization: `Bearer ${auth.access_token}`,
-        },
-      }
-    ).then((res) => res.json())) as
-      | SpotifySongData
-      | { error: { status: number; message: string } };
-
-    console.log("FETCHED SONGS:", res);
-    // { error: { status: 401, message: 'The access token expired' } }
-
-    if ("error" in res) {
-      const err = new Error(res.error.message);
-      err.statusCode = res.error.status;
-      throw err;
+    if (!auth) {
+      return null;
     }
 
-    return (
-      <>
-        {res.tracks.items.map((track: any) => (
-          <SongItem
-            href={track.external_urls.spotify}
-            key={track.id}
-            image={track.album.images[0].url}
-            title={track.name}
-            artist={track.artists.map((artist) => artist.name).join(", ")}
-          />
-        ))}
-      </>
-    );
-    // return res;
+    return renderSongsAsync(auth, { query, limit });
   };
 
   return (
@@ -146,7 +118,7 @@ export function SpotifyClientAuthProvider({
           storeAccessToken(res);
           return res;
         },
-        searchSongs,
+        searchSongs: renderSongsWithAuthAsync,
 
         getFreshAccessToken,
         accessToken: accessObject?.access_token ?? null,
