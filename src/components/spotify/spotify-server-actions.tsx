@@ -3,11 +3,11 @@
 import React from "react";
 
 import { SongItem } from "./songs";
-import type { SpotifySongData } from "./spotify-validation";
+import type { SpotifySongData } from "@/lib/spotify-auth";
 
 export const renderSongsAsync = async (
   auth: { access_token: string },
-  { query, limit }: { query: string; limit: number }
+  { query, limit }: { query: string; limit?: number }
 ) => {
   const res = (await fetch(
     `https://api.spotify.com/v1/search?` +
@@ -30,6 +30,7 @@ export const renderSongsAsync = async (
 
   if ("error" in res) {
     const err = new Error(res.error.message);
+    // @ts-expect-error
     err.statusCode = res.error.status;
     throw err;
   }

@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { SpotifyClientAuthProvider } from "@/components/spotify/spotify-client-provider";
+import { SpotifyClientAuthProvider } from "@/lib/spotify-auth/spotify-client-provider";
 import { SpotifyActionsProvider } from "@/components/spotify/spotify-actions";
 import { makeRedirectUri } from "expo-auth-session";
 

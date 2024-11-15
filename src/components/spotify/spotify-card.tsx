@@ -8,14 +8,14 @@ import { Text, Button, ScrollView, View } from "react-native";
 import SpotifyButton from "./spotify-auth-button";
 import { SpotifyBrandButton } from "./spotify-brand-button";
 import { SongItemSkeleton } from "./songs";
-import { SpotifyAuthContext } from "./spotify-client-provider";
+import { useSpotifyAuth } from "@/lib/spotify-auth";
 import { Try } from "expo-router/build/views/Try";
 import { SpotifyActionsContext } from "./spotify-actions";
 
 export default function SpotifyCard({ query }: { query: string }) {
-  const spotifyAuth = React.use(SpotifyAuthContext);
+  const spotifyAuth = useSpotifyAuth();
 
-  if (!spotifyAuth?.accessToken) {
+  if (!spotifyAuth.accessToken) {
     return <SpotifyButton />;
   }
 
@@ -54,7 +54,7 @@ function AuthenticatedPage({ query }: { query: string }) {
 }
 
 function LogoutButton() {
-  const spotifyAuth = React.use(SpotifyAuthContext);
+  const spotifyAuth = useSpotifyAuth();
 
   return (
     <SpotifyBrandButton
@@ -67,7 +67,7 @@ function LogoutButton() {
 
 // NOTE: This won't get called because server action invocation happens at the root :(
 function SpotifyError({ error, retry }: { error: Error; retry: () => void }) {
-  const spotifyAuth = React.use(SpotifyAuthContext);
+  const spotifyAuth = useSpotifyAuth();
 
   console.log("SpotifyError:", error);
   React.useEffect(() => {

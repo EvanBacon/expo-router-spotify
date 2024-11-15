@@ -2,7 +2,7 @@
 
 import "@/lib/local-storage";
 
-import React from "react";
+import React, { use } from "react";
 
 import {
   SpotifyCodeExchangeResponse,
@@ -24,14 +24,19 @@ export const SpotifyAuthContext = React.createContext<{
   setAccessToken: (access: SpotifyCodeExchangeResponse) => void;
   clearAccessToken: () => void;
   getFreshAccessToken: () => Promise<SpotifyCodeExchangeResponse>;
-  exchangeAuthCodeAsync: (props: {
-    code: string;
-    redirectUri: string;
-  }) => Promise<any>;
+  exchangeAuthCodeAsync: (code: string) => Promise<any>;
   useSpotifyAuthRequest: (
     config?: Partial<AuthRequestConfig>
   ) => ReturnType<typeof useSpotifyAuthRequest>;
 } | null>(null);
+
+export function useSpotifyAuth() {
+  const ctx = use(SpotifyAuthContext);
+  if (!ctx) {
+    throw new Error("SpotifyAuthContext is null");
+  }
+  return ctx;
+}
 
 export function SpotifyClientAuthProvider({
   config,

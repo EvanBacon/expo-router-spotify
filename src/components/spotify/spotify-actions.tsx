@@ -1,16 +1,16 @@
 /// <reference types="react/canary" />
 "use client";
 
-import React, { use } from "react";
+import React from "react";
 
 import { renderSongsAsync } from "./spotify-server-actions";
-import { SpotifyAuthContext } from "./spotify-client-provider";
+import { useSpotifyAuth } from "@/lib/spotify-auth";
 
 export const SpotifyActionsContext = React.createContext<{
   renderSongsAsync: (props: {
     query: string;
     limit?: number;
-  }) => Promise<React.ReactElement>;
+  }) => Promise<React.ReactElement | null>;
 } | null>(null);
 
 export function SpotifyActionsProvider({
@@ -18,7 +18,7 @@ export function SpotifyActionsProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const authContext = use(SpotifyAuthContext);
+  const authContext = useSpotifyAuth();
 
   return (
     <SpotifyActionsContext.Provider
@@ -28,19 +28,15 @@ export function SpotifyActionsProvider({
           limit,
         }: {
           query: string;
-          limit: number;
+          limit?: number;
         }) {
-          if (!authContext?.auth) {
+          if (!authContext.auth) {
             return null;
           }
-
-          const auth = await authContext.getFreshAccessToken();
-
-          if (!auth) {
-            return null;
-          }
-
-          return renderSongsAsync(auth, { query, limit });
+          return renderSongsAsync(await authContext.getFreshAccessToken(), {
+            query,
+            limit,
+          });
         },
       }}
     >

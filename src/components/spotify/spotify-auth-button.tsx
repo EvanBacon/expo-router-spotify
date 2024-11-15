@@ -3,12 +3,12 @@
 import * as React from "react";
 
 import { SpotifyBrandButton } from "./spotify-brand-button";
-import { SpotifyAuthContext } from "./spotify-client-provider";
+import { useSpotifyAuth } from "@/lib/spotify-auth";
 
 export default function SpotifyAuthButton() {
-  const context = React.use(SpotifyAuthContext);
+  const { useSpotifyAuthRequest } = useSpotifyAuth();
 
-  const [request, , promptAsync] = context!.useSpotifyAuthRequest();
+  const [request, , promptAsync] = useSpotifyAuthRequest();
 
   return (
     <SpotifyBrandButton

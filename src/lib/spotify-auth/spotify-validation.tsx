@@ -76,6 +76,13 @@ export type SpotifySongData = {
       type: string;
       uri: string;
     }[];
+
+    limit: number;
+    /** "https://api.spotify.com/v1/search?query=Ashnikko&type=track&locale=*&offset=15&limit=15" */
+    next: string | null;
+    offset: number;
+    previous: string | null;
+    total: number;
   };
 };
 
