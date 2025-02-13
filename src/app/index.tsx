@@ -5,9 +5,7 @@
 import * as React from "react";
 import { Text, Button, ScrollView, View } from "react-native";
 
-import SpotifyButton, {
-  LogoutButton,
-} from "@/components/spotify/spotify-auth-button";
+import SpotifyButton from "@/components/spotify/spotify-auth-button";
 import { SongItemSkeleton } from "@/components/songs";
 import { useSpotifyAuth } from "@/lib/spotify-auth";
 import { Try } from "expo-router/build/views/Try";
