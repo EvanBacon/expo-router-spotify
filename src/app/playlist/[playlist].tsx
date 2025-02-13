@@ -1,8 +1,7 @@
 import { useSpotifyActions } from "@/components/api";
-import { BodyScrollView } from "@/components/ui/BodyScrollView";
-import { Stack, useLocalSearchParams } from "expo-router";
+import Playlist from "@/components/spotify/playlist-info";
+import { useLocalSearchParams } from "expo-router";
 import { Suspense } from "react";
-import { Button, Text, View } from "react-native";
 
 export { ErrorBoundary } from "expo-router";
 
@@ -12,12 +11,8 @@ export default function PlaylistScreen() {
   const actions = useSpotifyActions();
 
   return (
-    <>
-      <BodyScrollView>
-        <Suspense fallback={<Text>Loading...</Text>}>
-          {actions.renderPlaylistAsync({ playlistId: playlist })}
-        </Suspense>
-      </BodyScrollView>
-    </>
+    <Suspense fallback={<Playlist data={{ name: "..." }} />}>
+      {actions.renderPlaylistAsync({ playlistId: playlist })}
+    </Suspense>
   );
 }

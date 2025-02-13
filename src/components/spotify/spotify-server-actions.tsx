@@ -8,6 +8,7 @@ import type { SpotifySongData } from "@/lib/spotify-auth";
 import { Button, Text, View } from "react-native";
 import UserPlaylistsServer from "./user-playlists-server";
 import { Stack } from "expo-router";
+import Playlist from "./playlist-info";
 
 // Get user's playlists
 // Types for Spotify API responses
@@ -616,32 +617,171 @@ export const renderPlaylistAsync = async (
   auth: { access_token: string },
   { playlistId }: { playlistId: string }
 ) => {
-  const data = await fetch(
+  const data = (await fetch(
     `https://api.spotify.com/v1/playlists/${playlistId}`,
     {
       headers: { Authorization: `Bearer ${auth.access_token}` },
     }
-  ).then(handleSpotifyResponse);
+  ).then(handleSpotifyResponse)) as SpotifyPlaylistData;
 
-  console.log("DATA", data);
-  return (
-    <>
-      <Stack.Screen
-        options={{
-          title: data.name,
-        }}
-      />
-      <View className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {data.tracks.items.map((item) => (
-          <SongItem
-            href={item.track.external_urls.spotify}
-            key={item.track.id}
-            image={item.track?.album?.images?.[0]?.url}
-            title={item.track.name}
-            artist={item.track.artists.map((artist) => artist.name).join(", ")}
-          />
-        ))}
-      </View>
-    </>
-  );
+  // data.owner.href
+
+  const userData = await fetch(data.owner.href, {
+    headers: { Authorization: `Bearer ${auth.access_token}` },
+  }).then(handleSpotifyResponse);
+
+  return <Playlist data={data} user={userData} />;
+};
+
+export type SpotifyUserData = {
+  display_name: string;
+  external_urls: { spotify: string };
+  followers: { href: null; total: number };
+  href: string;
+  id: string;
+  images: { url: string; width: number; height: number }[];
+  type: "user";
+  /** 'spotify:user:gorillaz_' */
+  uri: string;
+};
+
+export type SpotifyPlaylistData = {
+  /** false */
+  collaborative: boolean;
+  description: string;
+  external_urls: {
+    /** 'https://open.spotify.com/playlist/5tPNVYsBktfRv2qjEUdrKv' */
+    spotify: string;
+  };
+  followers: { href: null | unknown; total: 0 };
+  /** 'https://api.spotify.com/v1/playlists/5tPNVYsBktfRv2qjEUdrKv?locale=*' */
+  href: string;
+  /** '5tPNVYsBktfRv2qjEUdrKv' */
+  id: string;
+  images: [
+    {
+      height: null | number;
+      url: string;
+      width: null | number;
+    }
+  ];
+  /** 'Haloween' */
+  name: string;
+  owner: {
+    /** 'Evan Bacon' */
+    display_name: string;
+    external_urls: { spotify: string };
+    /** 'https://api.spotify.com/v1/users/12158865036' */
+    href: string;
+    /** '12158865036' */
+    id: string;
+    /** 'user' */
+    type: string;
+    /** 'spotify:user:12158865036' */
+    uri: string;
+  };
+  primary_color: null | unknown;
+  public: boolean;
+  /** 'AAAAAyohsZzG5NONXah0DW8Q+VfybDFU' */
+  snapshot_id: string;
+  tracks: {
+    href: string;
+    items: {
+      /** "2023-06-25T02:43:32Z" */
+      added_at: string;
+      added_by: {
+        external_urls: {
+          spotify: string;
+        };
+        href: string;
+        id: string;
+        type: string | "user";
+        uri: string;
+      };
+      is_local: boolean;
+      primary_color: null;
+      track: {
+        preview_url: null;
+        available_markets: string[];
+        explicit: boolean;
+        type: string | "track";
+        episode: boolean;
+        track: boolean;
+        album: {
+          available_markets: string[];
+          type: string | "album";
+          album_type: string | "single";
+          /**  "https://api.spotify.com/v1/albums/2AWdSvqkBNvj9eeM48KQTJ" */
+          href: string;
+          /** "2AWdSvqkBNvj9eeM48KQTJ" */
+          id: string;
+          images: {
+            /** "https://i.scdn.co/image/ab67616d0000b273c41af63dd888032c52715215" */
+            url: string;
+            width: number;
+            height: number;
+          }[];
+
+          /** "Halloweenie IV: Innards" */
+          name: string;
+          /** "2021-10-22" */
+          release_date: string;
+          /**  "day" */
+          release_date_precision: string;
+          /** "spotify:album:2AWdSvqkBNvj9eeM48KQTJ" */
+          uri: string;
+          artists: [
+            {
+              external_urls: {
+                spotify: string;
+              };
+              href: string;
+              id: string;
+              name: string;
+              type: string | "artist";
+              uri: string;
+            }
+          ];
+          external_urls: {
+            spotify: string;
+          };
+          total_tracks: number;
+        };
+        artists: [
+          {
+            external_urls: {
+              spotify: string;
+            };
+            href: string;
+            id: string;
+            name: string;
+            type: string | "artist";
+            uri: string;
+          }
+        ];
+        disc_number: number;
+        track_number: number;
+        duration_ms: number;
+        external_ids: { isrc: string };
+        external_urls: {
+          spotify: string;
+        };
+        href: string;
+        id: string;
+        name: string;
+        popularity: number;
+        uri: string;
+        is_local: boolean;
+      };
+      video_thumbnail: { url: null };
+    }[];
+    limit: number;
+    next: null;
+    offset: number;
+    previous: null;
+    total: number;
+  };
+  type: "playlist";
+  // uri: 'spotify:playlist:5tPNVYsBktfRv2qjEUdrKv'
+  uri: string;
 };

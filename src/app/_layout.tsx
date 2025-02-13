@@ -8,6 +8,7 @@ import { makeRedirectUri } from "expo-auth-session";
 import { SpotifyActionsProvider } from "@/components/api";
 
 import "@/global.css";
+import ThemeProvider from "@/components/ui/ThemeProvider";
 
 const redirectUri = makeRedirectUri({
   scheme: "exai",
@@ -15,21 +16,23 @@ const redirectUri = makeRedirectUri({
 
 export default function Page() {
   return (
-    <SpotifyClientAuthProvider
-      config={{
-        clientId: process.env.EXPO_PUBLIC_SPOTIFY_CLIENT_ID!,
-        scopes: [
-          "user-read-email",
-          "user-read-private",
-          "playlist-read-private",
-          "playlist-modify-public",
-          "user-top-read",
-        ],
-        redirectUri,
-      }}
-    >
-      <InnerAuth />
-    </SpotifyClientAuthProvider>
+    <ThemeProvider>
+      <SpotifyClientAuthProvider
+        config={{
+          clientId: process.env.EXPO_PUBLIC_SPOTIFY_CLIENT_ID!,
+          scopes: [
+            "user-read-email",
+            "user-read-private",
+            "playlist-read-private",
+            "playlist-modify-public",
+            "user-top-read",
+          ],
+          redirectUri,
+        }}
+      >
+        <InnerAuth />
+      </SpotifyClientAuthProvider>
+    </ThemeProvider>
   );
 }
 
