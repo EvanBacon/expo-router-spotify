@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useNavigation } from "expo-router";
 import { SearchBarProps } from "react-native-screens";
+import * as AC from "@bacons/apple-colors";
 
 export function useHeaderSearch(options: Omit<SearchBarProps, "ref"> = {}) {
   const [search, setSearch] = useState("");
@@ -19,6 +20,7 @@ export function useHeaderSearch(options: Omit<SearchBarProps, "ref"> = {}) {
         setSearch(e.nativeEvent.text);
         options.onSearchButtonPress?.(e);
       },
+      tintColor: AC.label,
       onCancelButtonPress(e) {
         setSearch("");
         options.onCancelButtonPress?.(e);

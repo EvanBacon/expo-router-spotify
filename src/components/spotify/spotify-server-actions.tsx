@@ -9,6 +9,7 @@ import { Button, Text, View } from "react-native";
 import UserPlaylistsServer from "./user-playlists-server";
 import { Stack } from "expo-router";
 import Playlist from "./playlist-info";
+import SearchResults from "./search-results";
 
 // Get user's playlists
 // Types for Spotify API responses
@@ -108,7 +109,7 @@ export const renderSongsAsync = async (
     `https://api.spotify.com/v1/search?` +
       new URLSearchParams({
         q: query,
-        type: "track",
+        type: "track,artist,album",
         limit: limit?.toString() ?? "10",
       }),
     {
@@ -118,19 +119,9 @@ export const renderSongsAsync = async (
     }
   ).then(handleSpotifyResponse)) as SpotifySongData;
 
-  return (
-    <>
-      {res.tracks.items.map((track) => (
-        <SongItem
-          href={track.external_urls.spotify}
-          key={track.id}
-          image={track.album.images[0].url}
-          title={track.name}
-          artist={track.artists.map((artist) => artist.name).join(", ")}
-        />
-      ))}
-    </>
-  );
+  // const res = require("@/fixtures/drake-search.json") as SpotifySongData;
+
+  return <SearchResults data={res} query={query} />;
 };
 
 export const getUserPlaylists = async (
@@ -166,7 +157,7 @@ export const getUserPlaylists = async (
     );
   }
 
-  return <UserPlaylistsServer data={data} dom={{ matchContents: true }} />;
+  return <UserPlaylistsServer data={data} />;
 };
 
 // Get user's top tracks

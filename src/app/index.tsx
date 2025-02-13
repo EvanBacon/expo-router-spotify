@@ -3,17 +3,17 @@
 "use client";
 
 import * as React from "react";
-import { Text, Button, ScrollView, View } from "react-native";
+import { Text, Button, View } from "react-native";
 
 import SpotifyButton from "@/components/spotify/spotify-auth-button";
-import { SongItemSkeleton } from "@/components/songs";
 import { useSpotifyAuth } from "@/lib/spotify-auth";
-import { Try } from "expo-router/build/views/Try";
 import { useHeaderSearch } from "@/hooks/useHeaderSearch";
 import { useSpotifyActions } from "@/components/api";
-import { BodyScrollView } from "@/components/ui/BodyScrollView";
 import { Stack } from "expo-router";
 import { UserPlaylists } from "@/components/user-playlists";
+import { SearchResultsSkeleton } from "@/components/spotify/search-results";
+
+export { SpotifyError as ErrorBoundary };
 
 export default function SpotifyCard() {
   const spotifyAuth = useSpotifyAuth();
@@ -37,59 +37,24 @@ export default function SpotifyCard() {
           },
         }}
       />
-      <BodyScrollView>
-        <AuthenticatedPage />
-      </BodyScrollView>
+
+      <AuthenticatedPage />
     </>
   );
 }
 
 function AuthenticatedPage() {
   const text = useHeaderSearch();
+  const actions = useSpotifyActions();
 
   if (!text) {
     return <UserPlaylists />;
   }
 
   return (
-    <>
-      <SongsScroller query={text} />
-    </>
-  );
-}
-
-export { SpotifyError as ErrorBoundary };
-
-function SongsScroller({ query }: { query: string }) {
-  const actions = useSpotifyActions();
-
-  return (
-    <>
-      <ScrollView
-        horizontal
-        contentContainerStyle={{
-          gap: 8,
-          padding: 16,
-        }}
-      >
-        <Try catch={SpotifyError}>
-          <React.Suspense
-            fallback={
-              <>
-                <SongItemSkeleton />
-                <SongItemSkeleton />
-                <SongItemSkeleton />
-                <SongItemSkeleton />
-                <SongItemSkeleton />
-                <SongItemSkeleton />
-              </>
-            }
-          >
-            {actions!.renderSongsAsync({ query, limit: 15 })}
-          </React.Suspense>
-        </Try>
-      </ScrollView>
-    </>
+    <React.Suspense fallback={<SearchResultsSkeleton />}>
+      {actions!.renderSongsAsync({ query: text, limit: 15 })}
+    </React.Suspense>
   );
 }
 
