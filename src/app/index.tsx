@@ -11,7 +11,7 @@ import { useSpotifyAuth } from "@/lib/spotify-auth";
 import { Try } from "expo-router/build/views/Try";
 import { useHeaderSearch } from "@/hooks/useHeaderSearch";
 import { useSpotifyActions } from "@/components/api";
-import { BodyScrollView } from "@/components/ui/body";
+import { BodyScrollView } from "@/components/ui/BodyScrollView";
 import { Stack } from "expo-router";
 import { UserPlaylists } from "@/components/user-playlists";
 

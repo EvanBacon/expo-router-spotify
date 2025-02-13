@@ -1,5 +1,5 @@
 import { useSpotifyActions } from "@/components/api";
-import { BodyScrollView } from "@/components/ui/body";
+import { BodyScrollView } from "@/components/ui/BodyScrollView";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { Suspense } from "react";
 import { Button, Text, View } from "react-native";

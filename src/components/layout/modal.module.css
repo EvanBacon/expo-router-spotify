@@ -1,0 +1,48 @@
+.modal {
+  display: flex;
+  flex: 1;
+  pointer-events: auto;
+  background-color: var(--apple-systemGroupedBackground);
+  border: 1px solid var(--apple-separator); /* Replace with your separator variable */
+}
+
+@media (min-width: 768px) {
+  .modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 50;
+    width: 100%;
+    max-width: 55rem;
+    min-height: 50rem;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1); /* Replace with your shadow variable */
+    max-height: 80%;
+    overflow: scroll;
+    border-radius: 0.5rem; /* Equivalent to sm:rounded-lg */
+    outline: none;
+  }
+}
+
+.drawerContent {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+  height: 100%;
+  max-height: 97%;
+  outline: none;
+  
+}
+
+@media (min-width: 768px) {
+  .drawerContent {
+    max-height: 100%;
+    /* pointer-events: box-none; */
+  }
+}
