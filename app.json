@@ -26,7 +26,8 @@
     "plugins": ["expo-router"],
     "experiments": {
       "typedRoutes": true,
-      "reactServerFunctions": true
+      "reactServerFunctions": true,
+      "reactCompiler": true
     }
   }
 }
