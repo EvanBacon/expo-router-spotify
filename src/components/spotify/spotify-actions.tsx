@@ -11,6 +11,28 @@ type AuthContext = {
   auth: AuthResults | null;
   getFreshAccessToken: () => Promise<AuthResults>;
 };
+const cache = new Map<string, { result: any; timestamp: number }>();
+
+function withCachedServerActionResults<
+  T extends (...args: any[]) => Promise<any>
+>(action: T, funcName: string, maxDuration: number) {
+  console.log("action.name>", funcName);
+
+  return async (...args: Parameters<T>): Promise<ReturnType<T>> => {
+    const cacheKey = `cache_${funcName}_${JSON.stringify(args)}`;
+
+    const cacheEntry = cache.get(cacheKey);
+
+    if (cacheEntry && Date.now() - cacheEntry.timestamp < maxDuration) {
+      return cacheEntry.result;
+    }
+
+    const result = await action(...args);
+    cache.set(cacheKey, { result, timestamp: Date.now() });
+
+    return result;
+  };
+}
 
 export function createSpotifyAPI<
   TActions extends Record<string, AnyServerAction>
@@ -34,10 +56,19 @@ export function createSpotifyAPI<
 
       for (const [key, serverAction] of Object.entries(serverActions)) {
         actions[key] = async (...args: any[]) => {
-          return withAccessToken.bind(null, {
+          const authAction = withAccessToken.bind(null, {
             action: serverAction,
             accessToken: authContext.auth,
-          })(...args);
+          });
+
+          const cacheServerAction = withCachedServerActionResults(
+            authAction,
+            key,
+            // 1 minute
+            1000 * 60
+          );
+
+          return cacheServerAction(...args);
         };
       }
 

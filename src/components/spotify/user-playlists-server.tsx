@@ -1,6 +1,6 @@
 "use client";
 
-import type { SpotifyPaging, SpotifyPlaylist } from "./spotify-server-actions";
+import type { SpotifyPaging, SpotifyPlaylist } from "./spotify-api-types";
 
 import * as Form from "@/components/ui/Form";
 import { Image, View } from "react-native";
