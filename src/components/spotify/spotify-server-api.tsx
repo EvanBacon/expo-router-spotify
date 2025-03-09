@@ -52,12 +52,14 @@ export function fetchWithAuth(url: string, options: RequestInit = {}) {
   );
 }
 
+// Fetch from spotify and handle the response to throw as an error.
 export function fetchSpotifyDataAsync<TData extends any>(
   url: string,
   options: RequestInit = {}
 ): Promise<TData> {
   return fetchWithAuth(url, options).then((res) => handleSpotifyResponse(res));
 }
+
 // Helper function to handle Spotify API responses
 async function handleSpotifyResponse<TData extends any>(
   response: Response

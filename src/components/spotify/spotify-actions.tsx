@@ -2,22 +2,9 @@
 "use client";
 
 import React from "react";
-import { withAccessToken, type AuthResults } from "./bind-action";
+import { withAccessToken, type AuthResults } from "./spotify-server-api";
 
 type AnyServerAction<TReturn = any> = (...args: any[]) => Promise<TReturn>;
-
-// Helper type to extract the parameters excluding the first one (auth)
-type ExcludeFirstParameter<T extends AnyServerAction> = T extends (
-  first: any,
-  ...rest: infer R
-) => any
-  ? (...args: R) => ReturnType<T>
-  : never;
-
-// Helper type to transform all server actions to client actions
-type TransformServerActions<T extends Record<string, AnyServerAction>> = {
-  [K in keyof T]: ExcludeFirstParameter<T[K]>;
-};
 
 // Type for the auth context
 type AuthContext = {
@@ -25,13 +12,11 @@ type AuthContext = {
   getFreshAccessToken: () => Promise<AuthResults>;
 };
 
-export function createSpotifyAPI<T extends Record<string, AnyServerAction>>(
-  serverActions: T
-) {
+export function createSpotifyAPI<
+  TActions extends Record<string, AnyServerAction>
+>(serverActions: TActions) {
   // Create a new context with the transformed server actions
-  const SpotifyContext = React.createContext<TransformServerActions<T> | null>(
-    null
-  );
+  const SpotifyContext = React.createContext<TActions | null>(null);
 
   // Create the provider component
   function SpotifyProvider({
@@ -56,7 +41,7 @@ export function createSpotifyAPI<T extends Record<string, AnyServerAction>>(
         };
       }
 
-      return actions as TransformServerActions<T>;
+      return actions as TActions;
     }, [authContext]);
 
     return (
