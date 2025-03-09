@@ -1,50 +1,18 @@
-# Welcome to your Expo app 👋
+# Expo Router Spotify Demo
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a demo project that uses React Server Components in Expo Router to securely authenticate and make requests to the Spotify API.
 
-## Get started
+Data is fetched at the edge, rendered on the server, and streamed back to the client (iOS, Android, and web).
 
-1. Install dependencies
+This template demonstrates how you can setup a cookies-like system for making the client authentication results automatically available to the server.
 
-   ```bash
-   npm install
-   ```
+Server action results are also cached in-memory for 60 seconds to demonstrate reducing the number of requests to the server.
 
-2. Start the app
+This demo requires environment variables in the `.env` file. You can get these in the [Spotify developer portal](https://developer.spotify.com/dashboard).
 
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+EXPO_PUBLIC_SPOTIFY_CLIENT_ID=xxx
+SPOTIFY_CLIENT_SECRET=xxx
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+The client secret will never be available in the client bundle for any platform and will only ever be used on the server. This ensures malicious actors cannot access your API.
