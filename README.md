@@ -16,3 +16,5 @@ SPOTIFY_CLIENT_SECRET=xxx
 ```
 
 The client secret will never be available in the client bundle for any platform and will only ever be used on the server. This ensures malicious actors cannot access your API.
+
+Try it in the browser with EAS Hosting https://rsc-spotify.expo.app/
