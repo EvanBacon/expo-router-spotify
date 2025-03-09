@@ -2,9 +2,12 @@
 "use client";
 
 import React from "react";
+import { withAccessToken, type AuthResults } from "./bind-action";
+
+type AnyServerAction<TReturn = any> = (...args: any[]) => Promise<TReturn>;
 
 // Helper type to extract the parameters excluding the first one (auth)
-type ExcludeFirstParameter<T extends (...args: any[]) => any> = T extends (
+type ExcludeFirstParameter<T extends AnyServerAction> = T extends (
   first: any,
   ...rest: infer R
 ) => any
@@ -12,22 +15,19 @@ type ExcludeFirstParameter<T extends (...args: any[]) => any> = T extends (
   : never;
 
 // Helper type to transform all server actions to client actions
-type TransformServerActions<T extends Record<string, Function>> = {
+type TransformServerActions<T extends Record<string, AnyServerAction>> = {
   [K in keyof T]: ExcludeFirstParameter<T[K]>;
 };
 
 // Type for the auth context
 type AuthContext = {
-  auth: { accessToken: string } | null;
-  getFreshAccessToken: () => Promise<{ access_token: string }>;
+  auth: AuthResults | null;
+  getFreshAccessToken: () => Promise<AuthResults>;
 };
 
-export function createSpotifyAPI<
-  T extends Record<
-    string,
-    (auth: { access_token: string }, ...args: any[]) => any
-  >
->(serverActions: T) {
+export function createSpotifyAPI<T extends Record<string, AnyServerAction>>(
+  serverActions: T
+) {
   // Create a new context with the transformed server actions
   const SpotifyContext = React.createContext<TransformServerActions<T> | null>(
     null
@@ -49,10 +49,10 @@ export function createSpotifyAPI<
 
       for (const [key, serverAction] of Object.entries(serverActions)) {
         actions[key] = async (...args: any[]) => {
-          if (!authContext.auth) {
-            return null;
-          }
-          return serverAction(await authContext.getFreshAccessToken(), ...args);
+          return withAccessToken.bind(null, {
+            action: serverAction,
+            accessToken: authContext.auth,
+          })(...args);
         };
       }
 

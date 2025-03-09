@@ -5,11 +5,11 @@ import React from "react";
 import { SongItem } from "../songs";
 
 import type { SpotifySongData } from "@/lib/spotify-auth";
-import { Button, Text, View } from "react-native";
+import { Text } from "react-native";
 import UserPlaylistsServer from "./user-playlists-server";
-import { Stack } from "expo-router";
 import Playlist from "./playlist-info";
 import SearchResults from "./search-results";
+import { fetchSpotifyDataAsync } from "./bind-action";
 
 // Get user's playlists
 // Types for Spotify API responses
@@ -101,45 +101,41 @@ const handleSpotifyResponse = async (response: Response) => {
 };
 
 // Original search function
-export const renderSongsAsync = async (
-  auth: { access_token: string },
-  { query, limit }: { query: string; limit?: number }
-) => {
-  const res = (await fetch(
-    `https://api.spotify.com/v1/search?` +
+export const renderSongsAsync = async ({
+  query,
+  limit,
+}: {
+  query: string;
+  limit?: number;
+}) => {
+  const res = await fetchSpotifyDataAsync<SpotifySongData>(
+    `/v1/search?` +
       new URLSearchParams({
         q: query,
         type: "track,artist,album",
         limit: limit?.toString() ?? "10",
-      }),
-    {
-      headers: {
-        Authorization: `Bearer ${auth.access_token}`,
-      },
-    }
-  ).then(handleSpotifyResponse)) as SpotifySongData;
+      })
+  );
 
   // const res = require("@/fixtures/drake-search.json") as SpotifySongData;
 
   return <SearchResults data={res} query={query} />;
 };
 
-export const getUserPlaylists = async (
-  auth: { access_token: string },
-  { limit = 20, offset = 0 }: { limit?: number; offset?: number }
-) => {
-  const data = (await fetch(
-    `https://api.spotify.com/v1/me/playlists?` +
+export const getUserPlaylists = async ({
+  limit = 20,
+  offset = 0,
+}: {
+  limit?: number;
+  offset?: number;
+}) => {
+  const data = await fetchSpotifyDataAsync<SpotifyPaging<SpotifyPlaylist>>(
+    `/v1/me/playlists?` +
       new URLSearchParams({
         limit: limit.toString(),
         offset: offset.toString(),
-      }),
-    {
-      headers: {
-        Authorization: `Bearer ${auth.access_token}`,
-      },
-    }
-  ).then(handleSpotifyResponse)) as SpotifyPaging<SpotifyPlaylist>;
+      })
+  );
 
   //   console.log("DATA", data.items[0].);
   // Handle empty response
@@ -161,28 +157,20 @@ export const getUserPlaylists = async (
 };
 
 // Get user's top tracks
-export const getTopTracks = async (
-  auth: { access_token: string },
-  {
-    timeRange = "medium_term",
-    limit = 20,
-  }: {
-    timeRange?: "short_term" | "medium_term" | "long_term";
-    limit?: number;
-  }
-) => {
-  const data = await fetch(
-    `https://api.spotify.com/v1/me/top/tracks?` +
+export const getTopTracks = async ({
+  timeRange = "medium_term",
+  limit = 20,
+}: {
+  timeRange?: "short_term" | "medium_term" | "long_term";
+  limit?: number;
+}) => {
+  const data = await fetchSpotifyDataAsync(
+    `/v1/me/top/tracks?` +
       new URLSearchParams({
         time_range: timeRange,
         limit: limit.toString(),
-      }),
-    {
-      headers: {
-        Authorization: `Bearer ${auth.access_token}`,
-      },
-    }
-  ).then(handleSpotifyResponse);
+      })
+  );
 
   return (
     <div className="space-y-4">
@@ -200,27 +188,22 @@ export const getTopTracks = async (
 };
 
 // Get recently played tracks
-export const getRecentlyPlayed = async (
-  auth: { access_token: string },
-  {
-    limit = 20,
-    before,
-    after,
-  }: { limit?: number; before?: number; after?: number }
-) => {
+export const getRecentlyPlayed = async ({
+  limit = 20,
+  before,
+  after,
+}: {
+  limit?: number;
+  before?: number;
+  after?: number;
+}) => {
   const params: Record<string, string> = { limit: limit.toString() };
   if (before) params.before = before.toString();
   if (after) params.after = after.toString();
 
-  const data = await fetch(
-    `https://api.spotify.com/v1/me/player/recently-played?` +
-      new URLSearchParams(params),
-    {
-      headers: {
-        Authorization: `Bearer ${auth.access_token}`,
-      },
-    }
-  ).then(handleSpotifyResponse);
+  const data = await fetchSpotifyDataAsync(
+    `/v1/me/player/recently-played?` + new URLSearchParams(params)
+  );
 
   return (
     <div className="space-y-4">
@@ -239,24 +222,21 @@ export const getRecentlyPlayed = async (
 };
 
 // Get recommendations based on seed tracks
-export const getRecommendations = async (
-  auth: { access_token: string },
-  {
-    seedTracks,
-    limit = 20,
-    minEnergy,
-    maxEnergy,
-    minDanceability,
-    maxDanceability,
-  }: {
-    seedTracks: string[];
-    limit?: number;
-    minEnergy?: number;
-    maxEnergy?: number;
-    minDanceability?: number;
-    maxDanceability?: number;
-  }
-) => {
+export const getRecommendations = async ({
+  seedTracks,
+  limit = 20,
+  minEnergy,
+  maxEnergy,
+  minDanceability,
+  maxDanceability,
+}: {
+  seedTracks: string[];
+  limit?: number;
+  minEnergy?: number;
+  maxEnergy?: number;
+  minDanceability?: number;
+  maxDanceability?: number;
+}) => {
   const params: Record<string, string> = {
     seed_tracks: seedTracks.join(","),
     limit: limit.toString(),
@@ -269,14 +249,9 @@ export const getRecommendations = async (
   if (maxDanceability !== undefined)
     params.max_danceability = maxDanceability.toString();
 
-  const data = await fetch(
-    `https://api.spotify.com/v1/recommendations?` + new URLSearchParams(params),
-    {
-      headers: {
-        Authorization: `Bearer ${auth.access_token}`,
-      },
-    }
-  ).then(handleSpotifyResponse);
+  const data = await fetchSpotifyDataAsync(
+    `/v1/recommendations?` + new URLSearchParams(params)
+  );
 
   return (
     <div className="space-y-4">
@@ -294,21 +269,21 @@ export const getRecommendations = async (
 };
 
 // Get user's saved albums
-export const getSavedAlbums = async (
-  auth: { access_token: string },
-  { limit = 20, offset = 0 }: { limit?: number; offset?: number }
-) => {
-  const data = await fetch(
-    `https://api.spotify.com/v1/me/albums?` +
+export const getSavedAlbums = async ({
+  limit = 20,
+  offset = 0,
+}: {
+  limit?: number;
+  offset?: number;
+}) => {
+  const data = await fetchSpotifyDataAsync<
+    SpotifyPaging<{ album: SpotifyAlbum }>
+  >(
+    `/v1/me/albums?` +
       new URLSearchParams({
         limit: limit.toString(),
         offset: offset.toString(),
-      }),
-    {
-      headers: { Authorization: `Bearer ${auth.access_token}` },
-    }
-  ).then((res) =>
-    handleSpotifyResponse<SpotifyPaging<{ album: SpotifyAlbum }>>(res)
+      })
   );
 
   return (
@@ -337,24 +312,22 @@ export const getSavedAlbums = async (
 };
 
 // Get user's followed artists
-export const getFollowedArtists = async (
-  auth: { access_token: string },
-  { limit = 20, after }: { limit?: number; after?: string }
-) => {
+export const getFollowedArtists = async ({
+  limit = 20,
+  after,
+}: {
+  limit?: number;
+  after?: string;
+}) => {
   const params = new URLSearchParams({
     type: "artist",
     limit: limit.toString(),
   });
   if (after) params.set("after", after);
 
-  const data = await fetch(
-    `https://api.spotify.com/v1/me/following?${params}`,
-    {
-      headers: { Authorization: `Bearer ${auth.access_token}` },
-    }
-  ).then((res) =>
-    handleSpotifyResponse<{ artists: SpotifyPaging<SpotifyArtist> }>(res)
-  );
+  const data = await fetchSpotifyDataAsync<{
+    artists: SpotifyPaging<SpotifyArtist>;
+  }>(`/v1/me/following?${params}`);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -394,22 +367,19 @@ export const getFollowedArtists = async (
 };
 
 // Get featured playlists
-export const getFeaturedPlaylists = async (
-  auth: { access_token: string },
-  {
-    limit = 20,
-    offset = 0,
-    country,
-    locale,
-    timestamp,
-  }: {
-    limit?: number;
-    offset?: number;
-    country?: string;
-    locale?: string;
-    timestamp?: string;
-  }
-) => {
+export const getFeaturedPlaylists = async ({
+  limit = 20,
+  offset = 0,
+  country,
+  locale,
+  timestamp,
+}: {
+  limit?: number;
+  offset?: number;
+  country?: string;
+  locale?: string;
+  timestamp?: string;
+}) => {
   const params = new URLSearchParams({
     limit: limit.toString(),
     offset: offset.toString(),
@@ -418,17 +388,10 @@ export const getFeaturedPlaylists = async (
   if (locale) params.set("locale", locale);
   if (timestamp) params.set("timestamp", timestamp);
 
-  const data = await fetch(
-    `https://api.spotify.com/v1/browse/featured-playlists?${params}`,
-    {
-      headers: { Authorization: `Bearer ${auth.access_token}` },
-    }
-  ).then((res) =>
-    handleSpotifyResponse<{
-      message: string;
-      playlists: SpotifyPaging<SpotifyPlaylist>;
-    }>(res)
-  );
+  const data = await fetchSpotifyDataAsync<{
+    message: string;
+    playlists: SpotifyPaging<SpotifyPlaylist>;
+  }>(`/v1/browse/featured-playlists?${params}`);
 
   return (
     <div className="space-y-4">
@@ -463,32 +426,24 @@ export const getFeaturedPlaylists = async (
 };
 
 // Get new releases
-export const getNewReleases = async (
-  auth: { access_token: string },
-  {
-    limit = 20,
-    offset = 0,
-    country,
-  }: {
-    limit?: number;
-    offset?: number;
-    country?: string;
-  }
-) => {
+export const getNewReleases = async ({
+  limit = 20,
+  offset = 0,
+  country,
+}: {
+  limit?: number;
+  offset?: number;
+  country?: string;
+}) => {
   const params = new URLSearchParams({
     limit: limit.toString(),
     offset: offset.toString(),
   });
   if (country) params.set("country", country);
 
-  const data = await fetch(
-    `https://api.spotify.com/v1/browse/new-releases?${params}`,
-    {
-      headers: { Authorization: `Bearer ${auth.access_token}` },
-    }
-  ).then((res) =>
-    handleSpotifyResponse<{ albums: SpotifyPaging<SpotifyAlbum> }>(res)
-  );
+  const data = await fetchSpotifyDataAsync<{
+    albums: SpotifyPaging<SpotifyAlbum>;
+  }>(`/v1/browse/new-releases?${params}`);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -523,13 +478,10 @@ export const getNewReleases = async (
 };
 
 // Get available genres
-export const getAvailableGenres = async (auth: { access_token: string }) => {
-  const data = await fetch(
-    "https://api.spotify.com/v1/recommendations/available-genre-seeds",
-    {
-      headers: { Authorization: `Bearer ${auth.access_token}` },
-    }
-  ).then((res) => handleSpotifyResponse<{ genres: string[] }>(res));
+export const getAvailableGenres = async () => {
+  const data = await fetchSpotifyDataAsync<{ genres: string[] }>(
+    "/v1/recommendations/available-genre-seeds"
+  );
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
@@ -546,34 +498,26 @@ export const getAvailableGenres = async (auth: { access_token: string }) => {
 };
 
 // Get category playlists
-export const getCategoryPlaylists = async (
-  auth: { access_token: string },
-  {
-    categoryId,
-    limit = 20,
-    offset = 0,
-    country,
-  }: {
-    categoryId: string;
-    limit?: number;
-    offset?: number;
-    country?: string;
-  }
-) => {
+export const getCategoryPlaylists = async ({
+  categoryId,
+  limit = 20,
+  offset = 0,
+  country,
+}: {
+  categoryId: string;
+  limit?: number;
+  offset?: number;
+  country?: string;
+}) => {
   const params = new URLSearchParams({
     limit: limit.toString(),
     offset: offset.toString(),
   });
   if (country) params.set("country", country);
 
-  const data = await fetch(
-    `https://api.spotify.com/v1/browse/categories/${categoryId}/playlists?${params}`,
-    {
-      headers: { Authorization: `Bearer ${auth.access_token}` },
-    }
-  ).then((res) =>
-    handleSpotifyResponse<{ playlists: SpotifyPaging<SpotifyPlaylist> }>(res)
-  );
+  const data = await fetchSpotifyDataAsync<{
+    playlists: SpotifyPaging<SpotifyPlaylist>;
+  }>(`/v1/browse/categories/${categoryId}/playlists?${params}`);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -604,22 +548,18 @@ export const getCategoryPlaylists = async (
   );
 };
 
-export const renderPlaylistAsync = async (
-  auth: { access_token: string },
-  { playlistId }: { playlistId: string }
-) => {
-  const data = (await fetch(
-    `https://api.spotify.com/v1/playlists/${playlistId}`,
-    {
-      headers: { Authorization: `Bearer ${auth.access_token}` },
-    }
-  ).then(handleSpotifyResponse)) as SpotifyPlaylistData;
+export const renderPlaylistAsync = async ({
+  playlistId,
+}: {
+  playlistId: string;
+}) => {
+  const data = await fetchSpotifyDataAsync<SpotifyPlaylistData>(
+    `/v1/playlists/${playlistId}`
+  );
 
   // data.owner.href
 
-  const userData = await fetch(data.owner.href, {
-    headers: { Authorization: `Bearer ${auth.access_token}` },
-  }).then(handleSpotifyResponse);
+  const userData = await fetchSpotifyDataAsync<any>(data.owner.href);
 
   return <Playlist data={data} user={userData} />;
 };

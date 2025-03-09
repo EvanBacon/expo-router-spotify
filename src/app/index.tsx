@@ -12,7 +12,6 @@ import { useSpotifyActions } from "@/components/api";
 import { Stack } from "expo-router";
 import { UserPlaylists } from "@/components/user-playlists";
 import { SearchResultsSkeleton } from "@/components/spotify/search-results";
-import { BodyScrollView } from "@/components/ui/BodyScrollView";
 import * as Form from "@/components/ui/Form";
 
 export { SpotifyError as ErrorBoundary };
