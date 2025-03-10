@@ -54,7 +54,7 @@ export default function UserPlaylistsServer({
                     <Form.Text style={{ fontSize: 14 }}>
                       {playlist.tracks.total} tracks
                     </Form.Text>
-                    {playlist.description && (
+                    {!!playlist.description && (
                       <Form.Text style={{ fontSize: 14 }}>
                         {playlist.description}
                       </Form.Text>

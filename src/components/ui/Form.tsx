@@ -50,7 +50,8 @@ export const List = forwardRef<
             contentContainerStyle
           )}
           style={{
-            maxWidth: 650,
+            maxWidth: 768,
+            width: "100%",
             marginHorizontal:
               process.env.EXPO_OS === "web" ? "auto" : undefined,
           }}
@@ -98,7 +99,7 @@ export const FormItem = forwardRef<
   if (href == null) {
     if (onPress == null) {
       return (
-        <View style={styles.itemPadding}>
+        <View style={[styles.itemPadding, { flex: 1 }]}>
           <HStack style={{ minHeight: minItemHeight }}>{children}</HStack>
         </View>
       );

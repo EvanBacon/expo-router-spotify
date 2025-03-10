@@ -51,12 +51,20 @@ function getScrollableNode(
   }
 }
 
+function useOptionalRoute() {
+  try {
+    return useRoute();
+  } catch {
+    return null;
+  }
+}
+
 export function useScrollToTop(
   ref: React.RefObject<ScrollableWrapper> | React.RefObject<WebView>,
   offset: number = 0
 ) {
   const navigation = useNavigation();
-  const route = useRoute();
+  const route = useOptionalRoute();
 
   React.useEffect(() => {
     let tabNavigations: NavigationProp<ReactNavigation.RootParamList>[] = [];
@@ -90,7 +98,7 @@ export function useScrollToTop(
           // So we should scroll to top only when we are on first screen
           const isFirst =
             tabNavigations.includes(navigation) ||
-            navigation.getState().routes[0].key === route.key;
+            navigation.getState().routes[0].key === route?.key;
 
           // Run the operation in the next frame so we're sure all listeners have been run
           // This is necessary to know if preventDefault() has been called
@@ -125,7 +133,7 @@ export function useScrollToTop(
     return () => {
       unsubscribers.forEach((unsubscribe) => unsubscribe());
     };
-  }, [navigation, ref, offset, route.key]);
+  }, [navigation, ref, offset, route?.key]);
 }
 
 export const useScrollRef =

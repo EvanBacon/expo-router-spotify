@@ -7,6 +7,7 @@ const api = createSpotifyAPI(serverActions);
 console.log("Provider", api);
 
 // Wrapping to ensure the auth context is available on the server without needing to manually pass to each function.
-const { Provider: SpotifyActionsProvider, useSpotify: useSpotifyActions } = api;
-
-export { SpotifyActionsProvider, useSpotifyActions };
+export const {
+  Provider: SpotifyActionsProvider,
+  useSpotify: useSpotifyActions,
+} = api;
