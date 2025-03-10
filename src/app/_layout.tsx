@@ -8,7 +8,8 @@ import { SpotifyActionsProvider } from "@/components/api";
 
 import "@/global.css";
 import ThemeProvider from "@/components/ui/ThemeProvider";
-import { Modal } from "react-native";
+
+import { Modal } from "@/components/modal";
 import SignInRoute from "@/components/sign-in";
 
 const redirectUri = makeRedirectUri({
@@ -55,12 +56,7 @@ function AuthStack() {
       </Stack>
 
       {/* Handle authentication outside of Expo Router to allow async animations and global handling. */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        presentationStyle="pageSheet"
-        visible={!spotifyAuth.accessToken}
-      >
+      <Modal visible={!spotifyAuth.accessToken}>
         <SignInRoute />
       </Modal>
     </>

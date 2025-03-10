@@ -32,7 +32,10 @@ export default function SpotifyCard() {
             }
 
             return (
-              <Form.Text onPress={() => spotifyAuth.clearAccessToken()}>
+              <Form.Text
+                onPress={() => spotifyAuth.clearAccessToken()}
+                style={{ marginRight: 16 }}
+              >
                 Logout
               </Form.Text>
             );
