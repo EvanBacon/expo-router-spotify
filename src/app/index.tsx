@@ -20,7 +20,7 @@ export default function SpotifyCard() {
     <>
       <Stack.Screen
         options={{
-          title: "Spotify Profile",
+          title: "Expo Spotify",
           headerRight() {
             if (process.env.EXPO_OS === "ios") {
               return (

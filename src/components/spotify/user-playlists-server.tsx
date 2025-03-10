@@ -13,7 +13,7 @@ export default function UserPlaylistsServer({
 }) {
   return (
     <>
-      <Form.List navigationTitle="Playlists">
+      <Form.List>
         <Form.Section>
           {data.items
             .filter((playlist) => {
@@ -72,7 +72,7 @@ export default function UserPlaylistsServer({
 export function UserPlaylistsSkeleton() {
   return (
     <>
-      <Form.List navigationTitle="Playlists">
+      <Form.List>
         <Form.Section>
           {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((_, index) => {
             return (
