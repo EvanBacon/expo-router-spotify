@@ -13,7 +13,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.bacon.rsc-spotify"
+      "bundleIdentifier": "com.bacon.rsc-spotify",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -23,7 +26,11 @@
     "web": {
       "bundler": "metro"
     },
-    "plugins": ["expo-router", "expo-font", "@bacons/apple-colors"],
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "@bacons/apple-colors"
+    ],
     "experiments": {
       "typedRoutes": true,
       "reactServerFunctions": true,
