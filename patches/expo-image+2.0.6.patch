@@ -1,0 +1,67 @@
+diff --git a/node_modules/expo-image/src/web/ImageWrapper.tsx b/node_modules/expo-image/src/web/ImageWrapper.tsx
+index 31f35d5..70144d5 100644
+--- a/node_modules/expo-image/src/web/ImageWrapper.tsx
++++ b/node_modules/expo-image/src/web/ImageWrapper.tsx
+@@ -1,19 +1,26 @@
+-import React, { useEffect, Ref } from 'react';
++import React, { useEffect, Ref } from "react";
+ 
+-import ColorTintFilter, { getTintColorStyle } from './ColorTintFilter';
+-import { ImageWrapperProps } from './ImageWrapper.types';
+-import { getImageWrapperEventHandler } from './getImageWrapperEventHandler';
+-import { useHeaders, useImageHashes } from './hooks';
+-import { absoluteFilledPosition, getObjectPositionFromContentPositionObject } from './positioning';
+-import { SrcSetSource } from './useSourceSelection';
+-import { ImageNativeProps, ImageSource } from '../Image.types';
++import ColorTintFilter, { getTintColorStyle } from "./ColorTintFilter";
++import { ImageWrapperProps } from "./ImageWrapper.types";
++import { getImageWrapperEventHandler } from "./getImageWrapperEventHandler";
++import { useHeaders, useImageHashes } from "./hooks";
++import {
++  absoluteFilledPosition,
++  getObjectPositionFromContentPositionObject,
++} from "./positioning";
++import { SrcSetSource } from "./useSourceSelection";
++import { ImageNativeProps, ImageSource } from "../Image.types";
+ 
+-function getFetchPriorityFromImagePriority(priority: ImageNativeProps['priority'] = 'normal') {
+-  return priority && ['low', 'high'].includes(priority) ? priority : 'auto';
++function getFetchPriorityFromImagePriority(
++  priority: ImageNativeProps["priority"] = "normal"
++) {
++  return priority && ["low", "high"].includes(priority) ? priority : "auto";
+ }
+ 
+-function getImgPropsFromSource(source: ImageSource | SrcSetSource | null | undefined) {
+-  if (source && 'srcset' in source) {
++function getImgPropsFromSource(
++  source: ImageSource | SrcSetSource | null | undefined
++) {
++  if (source && "srcset" in source) {
+     return {
+       srcSet: source.srcset,
+       sizes: source.sizes,
+@@ -50,7 +57,11 @@ const ImageWrapper = React.forwardRef(
+       isImageHash ? hashPlaceholderContentPosition : contentPosition
+     );
+ 
+-    const sourceWithHeaders = useHeaders(resolvedSource, cachePolicy, events?.onError);
++    const sourceWithHeaders = useHeaders(
++      resolvedSource,
++      cachePolicy,
++      events?.onError
++    );
+     if (!sourceWithHeaders) {
+       return null;
+     }
+@@ -72,7 +83,9 @@ const ImageWrapper = React.forwardRef(
+           }}
+           // @ts-ignore
+           // eslint-disable-next-line react/no-unknown-property
+-          fetchpriority={getFetchPriorityFromImagePriority(priority || 'normal')}
++          fetchPriority={getFetchPriorityFromImagePriority(
++            priority || "normal"
++          )}
+           {...getImageWrapperEventHandler(events, sourceWithHeaders)}
+           {...getImgPropsFromSource(source)}
+           {...props}

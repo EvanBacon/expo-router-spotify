@@ -3,7 +3,7 @@
 import type { SpotifyPlaylistData, SpotifyUserData } from "./spotify-api-types";
 
 import * as Form from "@/components/ui/Form";
-import { Image, View } from "react-native";
+import { View } from "react-native";
 import * as AC from "@bacons/apple-colors";
 import Animated, {
   interpolate,
@@ -12,6 +12,7 @@ import Animated, {
   useScrollViewOffset,
 } from "react-native-reanimated";
 import { Stack } from "expo-router";
+import { Image } from "expo-image";
 
 export default function Playlist({
   isLoading,
@@ -67,6 +68,7 @@ export default function Playlist({
         <Form.Section>
           <View style={{ alignItems: "center", gap: 8, padding: 16, flex: 1 }}>
             <Image
+              transition={500}
               source={
                 isLoading
                   ? undefined
@@ -109,6 +111,7 @@ export default function Playlist({
             >
               <Form.HStack style={{ gap: 16 }}>
                 <Image
+                  transition={500}
                   source={{
                     uri: isLoading ? undefined : user.images?.[0]?.url,
                   }}
@@ -167,6 +170,7 @@ export default function Playlist({
                 style={{ flexWrap: "wrap", flexDirection: "row", gap: 16 }}
               >
                 <Image
+                  transition={500}
                   source={{
                     uri: isLoading
                       ? undefined

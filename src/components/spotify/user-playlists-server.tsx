@@ -3,8 +3,9 @@
 import type { SpotifyPaging, SpotifyPlaylist } from "./spotify-api-types";
 
 import * as Form from "@/components/ui/Form";
-import { Image, View } from "react-native";
+import { View } from "react-native";
 import * as AC from "@bacons/apple-colors";
+import { Image } from "expo-image";
 
 export default function UserPlaylistsServer({
   data,
@@ -30,6 +31,7 @@ export default function UserPlaylistsServer({
                   style={{ flexWrap: "wrap", flexDirection: "row", gap: 16 }}
                 >
                   <Image
+                    transition={500}
                     source={{ uri: imageUrl }}
                     style={{
                       aspectRatio: 1,

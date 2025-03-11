@@ -1,8 +1,9 @@
 "use client";
 
 import * as Form from "@/components/ui/Form";
-import { Image, View } from "react-native";
+import { View } from "react-native";
 import * as AC from "@bacons/apple-colors";
+import { Image } from "expo-image";
 
 import { SpotifySongData } from "@/lib/spotify-auth";
 import React from "react";
@@ -62,6 +63,7 @@ export default function SearchResults({
                     style={{ flexWrap: "wrap", flexDirection: "row", gap: 16 }}
                   >
                     <Image
+                      transition={200}
                       source={{ uri: item.images?.[0]?.url }}
                       style={{
                         aspectRatio: 1,
@@ -103,6 +105,7 @@ export default function SearchResults({
                 style={{ flexWrap: "wrap", flexDirection: "row", gap: 16 }}
               >
                 <Image
+                  transition={200}
                   source={{ uri: item.album.images?.[0]?.url }}
                   style={{
                     aspectRatio: 1,
@@ -144,6 +147,7 @@ export default function SearchResults({
                 style={{ flexWrap: "wrap", flexDirection: "row", gap: 16 }}
               >
                 <Image
+                  transition={200}
                   source={{ uri: item.images?.[0]?.url }}
                   style={{
                     aspectRatio: 1,
