@@ -28,7 +28,7 @@ function PlaylistSkeleton() {
           },
           images: [
             {
-              url: "#",
+              url: "",
               height: 300,
               width: 300,
             },
@@ -40,7 +40,7 @@ function PlaylistSkeleton() {
           description: "",
           images: [
             {
-              url: "#",
+              url: "",
             },
           ],
           name: "Girly Pop 💕",

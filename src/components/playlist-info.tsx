@@ -49,6 +49,7 @@ export default function Playlist({
         options={{
           headerLargeTitle: false,
           headerTitle() {
+            if (!data.images?.[0]?.url) return null;
             return (
               <Animated.Image
                 source={{ uri: data.images?.[0]?.url }}
@@ -169,6 +170,7 @@ export default function Playlist({
               <Form.Link
                 key={item.track.id ?? String(index)}
                 disabled={isLoading}
+                target="_blank"
                 href={isLoading ? "#" : item.track.external_urls.spotify}
                 style={{ flexWrap: "wrap", flexDirection: "row", gap: 16 }}
               >

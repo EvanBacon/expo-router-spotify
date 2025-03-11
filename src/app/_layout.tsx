@@ -14,6 +14,9 @@ import { Modal } from "@/components/modal";
 import SignInRoute from "@/components/sign-in";
 import React, { useEffect } from "react";
 import { router, useGlobalSearchParams, usePathname } from "expo-router";
+import { LogBox } from "react-native";
+
+LogBox.ignoreAllLogs();
 
 const redirectUri = makeRedirectUri({
   scheme: "exspotify",
@@ -158,7 +161,15 @@ function AuthStack() {
                   return <WebHeader {...props} />;
                 },
         }}
-      />
+      >
+        <Stack.Screen name="index" />
+        <Stack.Screen
+          name="playlist/[playlist]"
+          options={{
+            headerBackButtonDisplayMode: "minimal",
+          }}
+        />
+      </Stack>
 
       {/* Handle authentication outside of Expo Router to allow async animations and global handling. */}
       <Modal visible={!spotifyAuth.accessToken}>

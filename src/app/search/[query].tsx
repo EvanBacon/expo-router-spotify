@@ -22,12 +22,6 @@ export default function SearchPage() {
     return null;
   }
 
-  //   return (
-  //     <Form.List>
-  //       <Form.Text>Query: "{text}"</Form.Text>
-  //     </Form.List>
-  //   );
-
   if (!text) {
     return <UserPlaylists />;
   }
