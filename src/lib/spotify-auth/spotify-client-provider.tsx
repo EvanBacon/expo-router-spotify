@@ -2,7 +2,7 @@
 
 import "@/lib/local-storage";
 
-import React, { use, useEffect } from "react";
+import React, { use } from "react";
 
 import {
   SpotifyCodeExchangeResponse,
@@ -15,7 +15,6 @@ import {
 } from "./auth-server-actions";
 import { useSpotifyAuthRequest } from "./spotify-auth-session-provider";
 import { AuthRequestConfig } from "expo-auth-session";
-import { router, useFocusEffect, usePathname } from "expo-router";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -81,15 +80,6 @@ export function SpotifyClientAuthProvider({
     return res;
   };
 
-  // const pathname = usePathname();
-
-  // useEffect(() => {
-  //   if (!accessObject?.access_token) {
-  //     console.log("pathname", pathname);
-  //     router.push("/sign-in");
-  //   }
-  // }, [accessObject]);
-
   return (
     <SpotifyAuthContext.Provider
       value={{
@@ -107,10 +97,10 @@ export function SpotifyClientAuthProvider({
             throw new Error("Cannot refresh token without an access object");
           }
           if (accessObject.expires_in >= Date.now()) {
-            console.log(
-              "[SPOTIFY]: Token still valid. Refreshing in: ",
-              accessObject.expires_in - Date.now()
-            );
+            // console.log(
+            //   "[SPOTIFY]: Token still valid. Refreshing in: ",
+            //   accessObject.expires_in - Date.now()
+            // );
             return accessObject;
           }
           if (!accessObject.refresh_token) {

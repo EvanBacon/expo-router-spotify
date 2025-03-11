@@ -56,7 +56,7 @@ export function createSpotifyAPI<
         actions[key] = async (...args: any[]) => {
           const authAction = withAccessToken.bind(null, {
             action: serverAction,
-            accessToken: authContext.auth,
+            accessToken: await authContext.getFreshAccessToken(),
           });
 
           const cacheServerAction = withCachedServerActionResults(
