@@ -7,7 +7,7 @@ import { Image } from "expo-image";
 
 import { SpotifySongData } from "@/lib/spotify-auth";
 import React from "react";
-import { ContentUnavailable } from "../ui/ContentUnavailable";
+import { ContentUnavailable } from "./ui/ContentUnavailable";
 
 function formatFollowers(followers: number) {
   if (followers < 1000) {

@@ -1,5 +1,5 @@
 import { useSpotifyActions } from "@/components/api";
-import Playlist from "@/components/spotify/playlist-info";
+import Playlist from "@/components/playlist-info";
 import { useLocalSearchParams } from "expo-router";
 import { Suspense } from "react";
 

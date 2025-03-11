@@ -1,6 +1,9 @@
 "use client";
 
-import type { SpotifyPlaylistData, SpotifyUserData } from "./spotify-api-types";
+import type {
+  SpotifyPlaylistData,
+  SpotifyUserData,
+} from "@/components/spotify/spotify-api-types";
 
 import * as Form from "@/components/ui/Form";
 import { View } from "react-native";

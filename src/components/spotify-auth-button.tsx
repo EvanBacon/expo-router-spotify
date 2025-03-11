@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { SpotifyBrandButton } from "./spotify-brand-button";
+import { SpotifyBrandButton } from "@/components/spotify-brand-button";
 import { useSpotifyAuth } from "@/lib/spotify-auth";
 
 export default function SpotifyAuthButton() {

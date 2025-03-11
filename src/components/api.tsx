@@ -1,6 +1,6 @@
 "use client";
 
-import { createSpotifyAPI } from "@/components/spotify/spotify-actions";
+import { createSpotifyAPI } from "@/components/spotify/create-spotify-client-api";
 import * as serverActions from "@/components/spotify/spotify-server-actions";
 
 const api = createSpotifyAPI(serverActions);

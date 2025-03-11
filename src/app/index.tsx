@@ -10,7 +10,7 @@ import { useHeaderSearch } from "@/hooks/useHeaderSearch";
 import { useSpotifyActions } from "@/components/api";
 import { Stack } from "expo-router";
 import { UserPlaylists } from "@/components/user-playlists";
-import { SearchResultsSkeleton } from "@/components/spotify/search-results";
+import { SearchResultsSkeleton } from "@/components/search-results";
 import * as Form from "@/components/ui/Form";
 
 export { SpotifyErrorBoundary as ErrorBoundary } from "@/components/spotify-error-boundary";

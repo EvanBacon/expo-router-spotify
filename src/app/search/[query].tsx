@@ -8,7 +8,7 @@ import { useSpotifyAuth } from "@/lib/spotify-auth";
 import { useSpotifyActions } from "@/components/api";
 import { useLocalSearchParams } from "expo-router";
 import { UserPlaylists } from "@/components/user-playlists";
-import { SearchResultsSkeleton } from "@/components/spotify/search-results";
+import { SearchResultsSkeleton } from "@/components/search-results";
 
 export { SpotifyErrorBoundary as ErrorBoundary } from "@/components/spotify-error-boundary";
 

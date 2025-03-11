@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { useSpotifyActions } from "./api";
-import { UserPlaylistsSkeleton } from "./spotify/user-playlists-server";
+import { UserPlaylistsSkeleton } from "@/components/user-playlists-server";
 
 export function UserPlaylists() {
   const { getUserPlaylists } = useSpotifyActions();

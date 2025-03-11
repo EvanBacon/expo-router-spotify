@@ -6,11 +6,11 @@ import React from "react";
 
 import type { SpotifySongData } from "@/lib/spotify-auth";
 import { Text } from "react-native";
-import UserPlaylistsServer from "./user-playlists-server";
-import Playlist from "./playlist-info";
-import SearchResults from "./search-results";
+import UserPlaylistsServer from "@/components/user-playlists-server";
+import Playlist from "@/components/playlist-info";
+import SearchResults from "@/components/search-results";
 import { fetchSpotifyDataAsync } from "./spotify-server-api";
-import {
+import type {
   SpotifyPaging,
   SpotifyPlaylist,
   SpotifyPlaylistData,

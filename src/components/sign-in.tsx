@@ -5,7 +5,7 @@
 import * as React from "react";
 import { View, Image } from "react-native";
 
-import SpotifyButton from "@/components/spotify/spotify-auth-button";
+import SpotifyButton from "@/components/spotify-auth-button";
 import * as Form from "@/components/ui/Form";
 
 export default function SignInRoute() {
