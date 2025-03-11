@@ -9,7 +9,8 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "prepare": "npx patch-package"
+    "prepare": "npx patch-package",
+    "deploy": "expo export -p web && eas deploy"
   },
   "dependencies": {
     "@bacons/apple-colors": "^0.0.6",

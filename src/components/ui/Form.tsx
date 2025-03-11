@@ -46,12 +46,14 @@ export const List = forwardRef<
             {
               paddingVertical: 16,
               gap: 24,
+              paddingTop: process.env.EXPO_OS === "web" ? 78 : undefined,
             },
             contentContainerStyle
           )}
           style={{
             maxWidth: 768,
             width: "100%",
+
             marginHorizontal:
               process.env.EXPO_OS === "web" ? "auto" : undefined,
           }}

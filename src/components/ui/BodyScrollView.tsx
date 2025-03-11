@@ -26,7 +26,10 @@ export const BodyScrollView = forwardRef<any, ScrollViewProps>((props, ref) => {
       scrollToOverflowEnabled
       automaticallyAdjustsScrollIndicatorInsets
       contentInsetAdjustmentBehavior="automatic"
-      contentInset={{ bottom: paddingBottom }}
+      contentInset={{
+        bottom: paddingBottom,
+        top: process.env.EXPO_OS === "web" ? 60 : undefined,
+      }}
       scrollIndicatorInsets={{ bottom: paddingBottom }}
       {...props}
       style={[{ backgroundColor: AC.systemGroupedBackground }, props.style]}
