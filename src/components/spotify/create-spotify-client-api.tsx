@@ -3,6 +3,7 @@
 
 import React from "react";
 import { withAccessToken, type AuthResults } from "./spotify-server-api";
+import type { SpotifyCodeExchangeResponse } from "@/lib/spotify-auth/spotify-validation";
 
 type AnyServerAction<TReturn = any> = (...args: any[]) => Promise<TReturn>;
 
@@ -10,6 +11,7 @@ type AnyServerAction<TReturn = any> = (...args: any[]) => Promise<TReturn>;
 type AuthContext = {
   auth: AuthResults | null;
   getFreshAccessToken: () => Promise<AuthResults>;
+  setAccessToken: (accessToken: SpotifyCodeExchangeResponse) => void;
 };
 const cache = new Map<string, { result: any; timestamp: number }>();
 
@@ -56,7 +58,7 @@ export function createSpotifyAPI<
         actions[key] = async (...args: any[]) => {
           const authAction = withAccessToken.bind(null, {
             action: serverAction,
-            accessToken: await authContext.getFreshAccessToken(),
+            accessToken: authContext.auth,
           });
 
           const cacheServerAction = withCachedServerActionResults(
@@ -66,7 +68,17 @@ export function createSpotifyAPI<
             1000 * 60
           );
 
-          return cacheServerAction(...args);
+          const { latestToken, results } = await cacheServerAction(...args);
+
+          if (latestToken) {
+            console.log(
+              "[SPOTIFY]: Access token refreshed on the server. Storing latest:",
+              latestToken
+            );
+            authContext.setAccessToken(latestToken);
+          }
+
+          return results;
         };
       }
 
