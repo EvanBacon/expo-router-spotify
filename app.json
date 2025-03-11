@@ -23,14 +23,13 @@
     "web": {
       "bundler": "metro"
     },
-    "plugins": ["expo-router"],
+    "plugins": ["expo-router", "expo-font", "@bacons/apple-colors"],
     "experiments": {
       "typedRoutes": true,
       "reactServerFunctions": true,
       "reactCompiler": true
     },
     "extra": {
-      "router": {},
       "eas": {
         "projectId": "2ca4f70f-c242-45d1-b323-0fd2291b9c9c"
       }

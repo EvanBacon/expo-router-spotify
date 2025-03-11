@@ -1,13 +1,13 @@
-import React from "react";
+import { Suspense } from "react";
 import { useSpotifyActions } from "./api";
 import { UserPlaylistsSkeleton } from "./spotify/user-playlists-server";
 
 export function UserPlaylists() {
-  const actions = useSpotifyActions();
+  const { getUserPlaylists } = useSpotifyActions();
 
   return (
-    <React.Suspense fallback={<UserPlaylistsSkeleton />}>
-      {actions.getUserPlaylists({ limit: 30 })}
-    </React.Suspense>
+    <Suspense fallback={<UserPlaylistsSkeleton />}>
+      {getUserPlaylists({ limit: 30 })}
+    </Suspense>
   );
 }

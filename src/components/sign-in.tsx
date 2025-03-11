@@ -3,7 +3,7 @@
 "use client";
 
 import * as React from "react";
-import { Text, Button, View, Image } from "react-native";
+import { View, Image } from "react-native";
 
 import SpotifyButton from "@/components/spotify/spotify-auth-button";
 import * as Form from "@/components/ui/Form";

@@ -16,8 +16,6 @@ const cache = new Map<string, { result: any; timestamp: number }>();
 function withCachedServerActionResults<
   T extends (...args: any[]) => Promise<any>
 >(action: T, funcName: string, maxDuration: number) {
-  console.log("action.name>", funcName);
-
   return async (...args: Parameters<T>): Promise<ReturnType<T>> => {
     const cacheKey = `cache_${funcName}_${JSON.stringify(args)}`;
 
