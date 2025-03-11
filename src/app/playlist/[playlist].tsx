@@ -3,16 +3,15 @@ import Playlist from "@/components/spotify/playlist-info";
 import { useLocalSearchParams } from "expo-router";
 import { Suspense } from "react";
 
-export { ErrorBoundary } from "expo-router";
+export { SpotifyErrorBoundary as ErrorBoundary } from "@/components/spotify-error-boundary";
 
 export default function PlaylistScreen() {
   const { playlist } = useLocalSearchParams<{ playlist: string }>();
-
-  const actions = useSpotifyActions();
+  const { renderPlaylistAsync } = useSpotifyActions();
 
   return (
     <Suspense fallback={<PlaylistSkeleton />}>
-      {actions.renderPlaylistAsync({ playlistId: playlist })}
+      {renderPlaylistAsync({ playlistId: playlist })}
     </Suspense>
   );
 }

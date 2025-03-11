@@ -3,7 +3,7 @@
 "use client";
 
 import * as React from "react";
-import { Text, Button } from "react-native";
+import { Button } from "react-native";
 
 import { useSpotifyAuth } from "@/lib/spotify-auth";
 import { useHeaderSearch } from "@/hooks/useHeaderSearch";
@@ -12,6 +12,8 @@ import { Stack } from "expo-router";
 import { UserPlaylists } from "@/components/user-playlists";
 import { SearchResultsSkeleton } from "@/components/spotify/search-results";
 import * as Form from "@/components/ui/Form";
+
+export { SpotifyErrorBoundary as ErrorBoundary } from "@/components/spotify-error-boundary";
 
 export default function MainRoute() {
   const spotifyAuth = useSpotifyAuth();
@@ -43,7 +45,7 @@ export default function MainRoute() {
         }}
       />
 
-      {spotifyAuth.accessToken && <AuthenticatedPage />}
+      {spotifyAuth.auth?.access_token && <AuthenticatedPage />}
     </>
   );
 }
@@ -60,34 +62,5 @@ function AuthenticatedPage() {
     <React.Suspense fallback={<SearchResultsSkeleton />}>
       {actions!.renderSongsAsync({ query: text, limit: 15 })}
     </React.Suspense>
-  );
-}
-
-// NOTE: This won't get called because server action invocation happens at the root :(
-export function ErrorBoundary({
-  error,
-  retry,
-}: {
-  error: Error;
-  retry: () => void;
-}) {
-  const spotifyAuth = useSpotifyAuth();
-
-  console.log("SpotifyError:", error);
-  React.useEffect(() => {
-    if (error.message.includes("access token expired")) {
-      spotifyAuth?.clearAccessToken();
-    }
-  }, [error, spotifyAuth]);
-
-  return (
-    <>
-      <Form.List>
-        <Form.Section title="Error">
-          <Text>{error.toString()}</Text>
-          <Button title="Retry" onPress={retry} />
-        </Form.Section>
-      </Form.List>
-    </>
   );
 }

@@ -56,7 +56,6 @@ function WebHeader(props: NativeStackHeaderProps) {
   const ref = React.useRef<HTMLInputElement>(null);
 
   const isOnSearchRoute = pathname.startsWith("/search");
-  console.log("query", text);
   useEffect(() => {
     if (ref.current && text) {
       ref.current.value = text;
