@@ -16,7 +16,7 @@ import * as Form from "@/components/ui/Form";
 export { SpotifyErrorBoundary as ErrorBoundary } from "@/components/spotify-error-boundary";
 
 export default function MainRoute() {
-  const spotifyAuth = useSpotifyAuth();
+  const { clearAccessToken, auth } = useSpotifyAuth();
 
   return (
     <>
@@ -25,19 +25,11 @@ export default function MainRoute() {
           title: "Expo Spotify",
           headerRight() {
             if (process.env.EXPO_OS === "ios") {
-              return (
-                <Button
-                  title="Logout"
-                  onPress={() => spotifyAuth.clearAccessToken()}
-                />
-              );
+              return <Button title="Logout" onPress={clearAccessToken} />;
             }
 
             return (
-              <Form.Text
-                onPress={() => spotifyAuth.clearAccessToken()}
-                style={{ marginRight: 16 }}
-              >
+              <Form.Text onPress={clearAccessToken} style={{ marginRight: 16 }}>
                 Logout
               </Form.Text>
             );
@@ -45,14 +37,14 @@ export default function MainRoute() {
         }}
       />
 
-      {spotifyAuth.auth?.access_token && <AuthenticatedPage />}
+      {auth?.access_token && <AuthenticatedPage />}
     </>
   );
 }
 
 function AuthenticatedPage() {
   const text = useHeaderSearch();
-  const actions = useSpotifyActions();
+  const { renderSongsAsync } = useSpotifyActions();
 
   if (!text) {
     return <UserPlaylists />;
@@ -60,7 +52,7 @@ function AuthenticatedPage() {
 
   return (
     <React.Suspense fallback={<SearchResultsSkeleton />}>
-      {actions!.renderSongsAsync({ query: text, limit: 15 })}
+      {renderSongsAsync({ query: text, limit: 15 })}
     </React.Suspense>
   );
 }
