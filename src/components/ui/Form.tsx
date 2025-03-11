@@ -208,25 +208,29 @@ export const Link = React.forwardRef<
       if (process.env.EXPO_OS === "web") {
         return <div style={{ paddingRight: 16 }}>{children}</div>;
       }
-      const wrappedTextChildren = React.Children.map(children, (child) => {
-        // Filter out empty children
-        if (!child) {
-          return null;
+      const wrappedTextChildren = React.Children.map(
+        children,
+        (child, index) => {
+          // Filter out empty children
+          if (!child) {
+            return null;
+          }
+          if (typeof child === "string") {
+            return (
+              <RNText
+                key={String(index)}
+                style={mergedStyleProp<TextStyle>(
+                  { ...font, color: AppleColors.link },
+                  props.style
+                )}
+              >
+                {child}
+              </RNText>
+            );
+          }
+          return child;
         }
-        if (typeof child === "string") {
-          return (
-            <RNText
-              style={mergedStyleProp<TextStyle>(
-                { ...font, color: AppleColors.link },
-                props.style
-              )}
-            >
-              {child}
-            </RNText>
-          );
-        }
-        return child;
-      });
+      );
 
       return (
         <HeaderButton
@@ -341,7 +345,11 @@ export function Section({
         { color: color ?? AppleColors.link },
         resolvedProps.style
       );
-      child = <RNText {...resolvedProps}>{title}</RNText>;
+      child = (
+        <RNText key={String(index)} {...resolvedProps}>
+          {title}
+        </RNText>
+      );
     }
 
     if (
@@ -353,6 +361,7 @@ export function Section({
         dynamicTypeRamp: "body",
         numberOfLines: 1,
         adjustsFontSizeToFit: true,
+        key: String(index),
         ...resolvedProps,
         onPress: undefined,
         style: mergedStyleProp(FormFont.default, resolvedProps.style),
@@ -363,7 +372,7 @@ export function Section({
           return null;
         }
 
-        return React.Children.map(resolvedProps.hint, (child) => {
+        return React.Children.map(resolvedProps.hint, (child, index) => {
           // Filter out empty children
           if (!child) {
             return null;
@@ -372,6 +381,7 @@ export function Section({
             return (
               <RNText
                 dynamicTypeRamp="body"
+                key={String(index)}
                 style={{
                   ...FormFont.secondary,
                   textAlign: "right",
@@ -412,7 +422,7 @@ export function Section({
 
       if (hintView || symbolView) {
         child = (
-          <HStack>
+          <HStack key={String(index)}>
             {symbolView}
             {child}
             {hintView && <View style={{ flex: 1 }} />}
@@ -425,7 +435,7 @@ export function Section({
 
       const wrappedTextChildren = React.Children.map(
         resolvedProps.children,
-        (linkChild) => {
+        (linkChild, index) => {
           // Filter out empty children
           if (!linkChild) {
             return null;
@@ -434,6 +444,7 @@ export function Section({
             return (
               <RNText
                 dynamicTypeRamp="body"
+                key={String(index)}
                 style={mergedStyles(FormFont.default, resolvedProps)}
               >
                 {linkChild}
@@ -449,13 +460,17 @@ export function Section({
           return null;
         }
 
-        return React.Children.map(resolvedProps.hint, (child) => {
+        return React.Children.map(resolvedProps.hint, (child, index) => {
           // Filter out empty children
           if (!child) {
             return null;
           }
           if (typeof child === "string") {
-            return <Text style={FormFont.secondary}>{child}</Text>;
+            return (
+              <Text style={FormFont.secondary} key={String(index)}>
+                {child}
+              </Text>
+            );
           }
           return child;
         });
@@ -485,6 +500,7 @@ export function Section({
       })();
 
       child = React.cloneElement(child, {
+        key: String(index),
         style: [
           FormFont.default,
           process.env.EXPO_OS === "web" && {
@@ -519,17 +535,21 @@ export function Section({
     // Ensure child is a FormItem otherwise wrap it in a FormItem
     if (!wrapsFormItem && !child.props.custom && child.type !== FormItem) {
       child = (
-        <FormItem onPress={originalOnPress} disabled={child.props.disabled}>
+        <FormItem
+          key={String(index)}
+          onPress={originalOnPress}
+          disabled={child.props.disabled}
+        >
           {child}
         </FormItem>
       );
     }
 
     return (
-      <>
+      <React.Fragment key={String(index)}>
         {child}
         {!isLastChild && <Separator />}
-      </>
+      </React.Fragment>
     );
   });
 

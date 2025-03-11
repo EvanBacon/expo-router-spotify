@@ -64,7 +64,7 @@ export default function Playlist({
           },
         }}
       />
-      <Form.List ref={ref} navigationTitle={""}>
+      <Form.List ref={ref}>
         <Form.Section>
           <View style={{ alignItems: "center", gap: 8, padding: 16, flex: 1 }}>
             <Image
