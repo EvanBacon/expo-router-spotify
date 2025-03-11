@@ -21,9 +21,8 @@ export function useHeaderSearch(options: Omit<SearchBarProps, "ref"> = {}) {
         options.onSearchButtonPress?.(e);
       },
       tintColor: AC.label,
-      
+
       onCancelButtonPress(e) {
-        console.log("Cancel", e);
         setSearch("");
         options.onCancelButtonPress?.(e);
       },
