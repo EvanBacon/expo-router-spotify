@@ -13,9 +13,10 @@ import ThemeProvider from "@/components/ui/ThemeProvider";
 import { Modal } from "@/components/modal";
 import SignInRoute from "@/components/sign-in";
 import React, { useEffect } from "react";
+import { router, useGlobalSearchParams, usePathname } from "expo-router";
 
 const redirectUri = makeRedirectUri({
-  scheme: "exai",
+  scheme: "exspotify",
 });
 
 export default function Page() {
@@ -167,14 +168,3 @@ function AuthStack() {
     </>
   );
 }
-
-import * as Form from "@/components/ui/Form";
-import { Button, Text } from "react-native";
-import {
-  router,
-  useFocusEffect,
-  useGlobalSearchParams,
-  useLocalSearchParams,
-  usePathname,
-  useSegments,
-} from "expo-router";

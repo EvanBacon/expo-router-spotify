@@ -96,8 +96,12 @@ const styles = StyleSheet.create({
 
 export const FormItem = forwardRef<
   typeof TouchableHighlight,
-  Pick<ViewProps, "children"> & { href?: Href<any>; onPress?: () => void }
->(function FormItem({ children, href, onPress }, ref) {
+  Pick<ViewProps, "children"> & {
+    disabled?: boolean;
+    href?: Href<any>;
+    onPress?: () => void;
+  }
+>(function FormItem({ children, href, onPress, disabled }, ref) {
   if (href == null) {
     if (onPress == null) {
       return (
@@ -109,6 +113,7 @@ export const FormItem = forwardRef<
     return (
       <TouchableHighlight
         ref={ref}
+        disabled={disabled}
         underlayColor={AppleColors.systemGray4}
         onPress={onPress}
       >
@@ -120,7 +125,7 @@ export const FormItem = forwardRef<
   }
 
   return (
-    <Link asChild href={href} onPress={onPress}>
+    <Link asChild disabled={disabled} href={href} onPress={onPress}>
       <TouchableHighlight ref={ref} underlayColor={AppleColors.systemGray4}>
         <View style={styles.itemPadding}>
           <HStack style={{ minHeight: minItemHeight }}>{children}</HStack>
@@ -310,11 +315,17 @@ export function Section({
 }) {
   const listStyle = React.useContext(ListStyleContext) ?? "auto";
 
-  const childrenWithSeparator = React.Children.map(children, (child, index) => {
-    if (!React.isValidElement(child)) {
-      return child;
+  const validChildren:
+    | React.ReactPortal
+    | React.ReactElement<unknown, string | React.JSXElementConstructor<any>>[] =
+    [];
+  React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) {
+      validChildren.push(child);
     }
-    const isLastChild = index === React.Children.count(children) - 1;
+  });
+  const childrenWithSeparator = validChildren.map((child, index) => {
+    const isLastChild = index === validChildren.length - 1;
 
     const resolvedProps = {
       ...child.props,
@@ -507,7 +518,11 @@ export function Section({
     }
     // Ensure child is a FormItem otherwise wrap it in a FormItem
     if (!wrapsFormItem && !child.props.custom && child.type !== FormItem) {
-      child = <FormItem onPress={originalOnPress}>{child}</FormItem>;
+      child = (
+        <FormItem onPress={originalOnPress} disabled={child.props.disabled}>
+          {child}
+        </FormItem>
+      );
     }
 
     return (

@@ -14,11 +14,16 @@ import Animated, {
 import { Stack } from "expo-router";
 
 export default function Playlist({
+  isLoading,
   data,
   user,
 }: {
-  data: SpotifyPlaylistData;
-  user: SpotifyUserData;
+  isLoading?: boolean;
+  data: Pick<
+    SpotifyPlaylistData,
+    "images" | "description" | "name" | "owner" | "tracks"
+  >;
+  user: Pick<SpotifyUserData, "images" | "display_name" | "followers">;
 }) {
   const ref = useAnimatedRef();
   const scroll = useScrollViewOffset(ref);
@@ -62,99 +67,154 @@ export default function Playlist({
         <Form.Section>
           <View style={{ alignItems: "center", gap: 8, padding: 16, flex: 1 }}>
             <Image
-              source={{
-                uri: data.images?.[0]?.url,
-              }}
+              source={
+                isLoading
+                  ? undefined
+                  : {
+                      uri: data.images?.[0]?.url,
+                    }
+              }
               style={{
                 width: 200,
                 height: 200,
                 //   aspectRatio: 1,
                 borderRadius: 8,
+                backgroundColor: AC.systemGray3,
               }}
             />
             <Form.Text
-              style={{ fontSize: 24, textAlign: "center", fontWeight: "600" }}
+              style={[
+                { fontSize: 24, textAlign: "center", fontWeight: "600" },
+                isLoading && {
+                  color: "transparent",
+                  backgroundColor: AC.systemGray4,
+                  borderRadius: 4,
+                },
+              ]}
             >
               {data.name}
             </Form.Text>
           </View>
 
-          {data.owner && (
+          {(!!(data.owner && user) || isLoading) && (
             <Form.Link
               target="_blank"
-              href={data.owner?.external_urls?.spotify}
+              disabled={isLoading}
+              href={isLoading ? "#" : data.owner?.external_urls?.spotify}
               hintImage={{
                 name: "person.fill.badge.plus",
                 size: 24,
                 color: AC.systemBlue,
-                animationSpec: {
-                  effect: {
-                    type: "pulse",
-                  },
-                  repeating: true,
-                },
               }}
             >
-              {user && (
-                <Form.HStack style={{ gap: 16 }}>
-                  <Image
-                    source={{ uri: user.images?.[0]?.url }}
-                    style={{
-                      aspectRatio: 1,
-                      height: 48,
-                      borderRadius: 999,
-                    }}
-                  />
-                  <View style={{ gap: 4 }}>
-                    <Form.Text style={Form.FormFont.default}>
-                      {user.display_name}
-                    </Form.Text>
-                    <Form.Text style={Form.FormFont.caption}>
-                      {user.followers.total} followers
-                    </Form.Text>
-                  </View>
-                </Form.HStack>
-              )}
+              <Form.HStack style={{ gap: 16 }}>
+                <Image
+                  source={{
+                    uri: isLoading ? undefined : user.images?.[0]?.url,
+                  }}
+                  style={{
+                    aspectRatio: 1,
+                    height: 48,
+                    borderRadius: 999,
+                    backgroundColor: AC.systemGray3,
+                  }}
+                />
+                <View style={{ gap: 4 }}>
+                  <Form.Text
+                    style={[
+                      Form.FormFont.default,
+                      isLoading && {
+                        color: "transparent",
+                        backgroundColor: AC.systemGray4,
+                        borderRadius: 4,
+                      },
+                    ]}
+                  >
+                    {user.display_name}
+                  </Form.Text>
+                  <Form.Text
+                    style={[
+                      Form.FormFont.caption,
+                      isLoading && {
+                        color: "transparent",
+                        backgroundColor: AC.systemGray4,
+                        borderRadius: 4,
+                      },
+                    ]}
+                  >
+                    {user.followers.total} followers
+                  </Form.Text>
+                </View>
+              </Form.HStack>
             </Form.Link>
           )}
         </Form.Section>
         <Form.Section>
-          <Form.Text hint={String(data.tracks?.total)}>Tracks</Form.Text>
-          {data.description && (
+          <Form.Text hint={String(isLoading ? " " : data.tracks?.total)}>
+            Tracks
+          </Form.Text>
+          {!!data.description && (
             <Form.Text hint={data.description}>Description</Form.Text>
           )}
         </Form.Section>
         <Form.Section>
-          {data.tracks?.items?.map((item) => {
+          {data.tracks?.items?.map((item, index) => {
             return (
               <Form.Link
-                key={item.track.id}
-                href={item.track.external_urls.spotify}
+                key={item.track.id ?? String(index)}
+                disabled={isLoading}
+                href={isLoading ? "#" : item.track.external_urls.spotify}
                 style={{ flexWrap: "wrap", flexDirection: "row", gap: 16 }}
               >
                 <Image
-                  source={{ uri: item.track?.album?.images?.[0]?.url }}
-                  style={{
-                    aspectRatio: 1,
-                    height: 64,
-                    borderRadius: 8,
-                    backgroundColor: AC.systemGray3,
+                  source={{
+                    uri: isLoading
+                      ? undefined
+                      : item.track?.album?.images?.[0]?.url,
                   }}
+                  style={[
+                    {
+                      aspectRatio: 1,
+                      height: 64,
+                      borderRadius: 8,
+                      backgroundColor: AC.systemGray3,
+                    },
+                    isLoading && {
+                      backgroundColor: AC.systemGray4,
+                    },
+                  ]}
                 />
                 <View
                   style={{
                     flexShrink: 1,
+                    gap: 2,
                   }}
                 >
                   <Form.Text
-                    style={{
-                      fontSize: 20,
-                      fontWeight: "600",
-                    }}
+                    style={[
+                      {
+                        fontSize: 20,
+                        fontWeight: "600",
+                      },
+                      isLoading && {
+                        color: "transparent",
+                        backgroundColor: AC.systemGray4,
+                        borderRadius: 4,
+                      },
+                    ]}
                   >
                     {item.track.name}
                   </Form.Text>
-                  <Form.Text style={{ fontSize: 14 }}>
+                  <Form.Text
+                    style={[
+                      { fontSize: 14 },
+                      isLoading && {
+                        color: "transparent",
+                        backgroundColor: AC.systemGray4,
+                        borderRadius: 4,
+                      },
+                    ]}
+                  >
                     {item.track.artists.map((artist) => artist.name).join(", ")}
                   </Form.Text>
                 </View>

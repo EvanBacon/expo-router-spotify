@@ -13,7 +13,7 @@ import { UserPlaylists } from "@/components/user-playlists";
 import { SearchResultsSkeleton } from "@/components/spotify/search-results";
 import * as Form from "@/components/ui/Form";
 
-export default function SpotifyCard() {
+export default function MainRoute() {
   const spotifyAuth = useSpotifyAuth();
 
   return (
@@ -81,11 +81,13 @@ export function ErrorBoundary({
   }, [error, spotifyAuth]);
 
   return (
-    <Form.List>
-      <Form.Section title="Error">
-        <Text>{error.toString()}</Text>
-        <Button title="Retry" onPress={retry} />
-      </Form.Section>
-    </Form.List>
+    <>
+      <Form.List>
+        <Form.Section title="Error">
+          <Text>{error.toString()}</Text>
+          <Button title="Retry" onPress={retry} />
+        </Form.Section>
+      </Form.List>
+    </>
   );
 }
