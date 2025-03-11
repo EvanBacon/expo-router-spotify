@@ -10,6 +10,7 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "prepare": "npx patch-package",
+    "testflight": "npx testflight",
     "deploy": "expo export -p web && eas deploy"
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "expo-status-bar": "~2.0.1",
     "expo-symbols": "~0.2.2",
     "expo-system-ui": "~4.0.8",
+    "expo-updates": "~0.27.1",
     "expo-web-browser": "~14.0.2",
     "postcss": "^8.4.49",
     "react": "18.3.1",

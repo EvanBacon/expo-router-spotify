@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "exspotify",
+    "icon": "https://github.com/expo.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
@@ -26,11 +27,7 @@
     "web": {
       "bundler": "metro"
     },
-    "plugins": [
-      "expo-router",
-      "expo-font",
-      "@bacons/apple-colors"
-    ],
+    "plugins": ["expo-router", "expo-font", "@bacons/apple-colors"],
     "experiments": {
       "typedRoutes": true,
       "reactServerFunctions": true,
@@ -40,6 +37,12 @@
       "eas": {
         "projectId": "2ca4f70f-c242-45d1-b323-0fd2291b9c9c"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/2ca4f70f-c242-45d1-b323-0fd2291b9c9c"
     }
   }
 }
