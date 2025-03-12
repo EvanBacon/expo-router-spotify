@@ -166,7 +166,8 @@ function AuthStack() {
         <Stack.Screen
           name="playlist/[playlist]"
           options={{
-            headerBackButtonDisplayMode: "minimal",
+            headerBackButtonDisplayMode: "default",
+            title: process.env.EXPO_OS === "web" ? undefined : "",
           }}
         />
       </Stack>
