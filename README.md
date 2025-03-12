@@ -1,6 +1,6 @@
 # Expo Router Spotify Demo
 
-This is a demo project that uses React Server Components in Expo Router to securely authenticate and make requests to the Spotify API.
+This is a demo project that uses [React Server Components in Expo Router](https://docs.expo.dev/guides/server-components/) to securely authenticate and make requests to the Spotify API.
 
 Data is fetched at the edge, rendered on the server, and streamed back to the client (iOS, Android, and web).
 
@@ -17,4 +17,4 @@ SPOTIFY_CLIENT_SECRET=xxx
 
 The client secret will never be available in the client bundle for any platform and will only ever be used on the server. This ensures malicious actors cannot access your API.
 
-Try it in the browser with EAS Hosting https://rsc-spotify.expo.app/
+Try it in the browser with EAS Hosting https://rsc-spotify.expo.app/ (pending Spotify API approval)
