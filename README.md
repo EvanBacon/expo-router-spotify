@@ -2,6 +2,8 @@
 
 This is a demo project that uses [React Server Components in Expo Router](https://docs.expo.dev/guides/server-components/) to securely authenticate and make requests to the Spotify API.
 
+https://github.com/user-attachments/assets/8f9740eb-2ee2-4b26-b6cb-93b0b3a8461b
+
 Data is fetched at the edge, rendered on the server, and streamed back to the client (iOS, Android, and web).
 
 This template demonstrates how you can setup a cookies-like system for making the client authentication results automatically available to the server.
