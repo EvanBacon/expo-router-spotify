@@ -27,7 +27,13 @@
     "web": {
       "bundler": "metro"
     },
-    "plugins": ["expo-router", "expo-font", "@bacons/apple-colors"],
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "@bacons/apple-colors",
+      "expo-sqlite",
+      "expo-web-browser"
+    ],
     "experiments": {
       "typedRoutes": true,
       "reactServerFunctions": true,
